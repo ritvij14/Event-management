@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activities.SplashScreenActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:id="@+id/splash_logo"
+        tools:ignore="ContentDescription"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/splash_title"
+        android:text="@string/club_name"
+        android:textSize="24sp"
+        android:textColor="#2D9CBD"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="80dp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/artist"
+            android:id="@+id/splash_artist"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plant_a_tree"
+            android:layout_marginTop="60dp"
+            android:id="@+id/splash_plant_tree"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+</LinearLayout>
