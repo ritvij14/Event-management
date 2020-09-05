@@ -3,12 +3,189 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.registration.ParentRegistrationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.registration.ParentLoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:fontFamily="@font/montserrat_extra_bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="120dp"
+        android:layout_marginStart="40dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:ignore="UselessParent">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/parent_name_layout"
+            android:hint="@string/parent_name"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/parent_name_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/phone_layout"
+            android:hint="@string/phone"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/phone_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/address_layout"
+            android:hint="@string/address"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/address_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/city_layout"
+            android:hint="@string/city"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/city_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/state_layout"
+            android:hint="@string/state"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/state_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/register_one_next"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="100dp"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            app:cornerRadius="30dp"
+            style="@style/TextAppearance.MaterialComponents.Button" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="30dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/already_registered"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/login"
+                android:id="@+id/register_to_login"
+                android:textColor="@color/colorAccent"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

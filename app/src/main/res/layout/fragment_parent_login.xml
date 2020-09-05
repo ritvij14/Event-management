@@ -112,6 +112,7 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:text="@string/register_here"
+                android:id="@+id/login_to_register"
                 android:textColor="@color/colorAccent"
                 android:fontFamily="@font/montserrat_regular"
                 android:textSize="12sp" />
