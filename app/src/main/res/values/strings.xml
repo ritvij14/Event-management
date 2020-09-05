@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Event-management</string>
     <string name="club_name">Inner Wheel Club of Vasco-Da-Gama</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_id">Email ID</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="not_a_user">Not a user?</string>
+    <string name="register_here">Register here</string>
+    <string name="forgot_password">Forgot password?</string>
 </resources>

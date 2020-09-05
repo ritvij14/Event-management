@@ -24,7 +24,7 @@
         android:id="@+id/splash_title"
         android:text="@string/club_name"
         android:textSize="24sp"
-        android:textColor="#2D9CBD"
+        android:textColor="@color/colorAccent"
         android:fontFamily="@font/montserrat_bold"
         android:textAlignment="center"
         android:layout_marginBottom="80dp" />
