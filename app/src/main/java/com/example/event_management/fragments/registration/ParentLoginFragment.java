@@ -18,7 +18,7 @@ import java.util.Objects;
 public class ParentLoginFragment extends Fragment {
 
     FragmentParentLoginBinding parentLoginBinding;
-    ParentRegistrationFragment parentRegistrationFragment;
+    ParentRegistrationPersonalInfoFragment parentRegistrationPersonalInfoFragment;
     public ParentLoginFragment() {
         // Required empty public constructor
     }
@@ -30,14 +30,14 @@ public class ParentLoginFragment extends Fragment {
         // Inflate the layout for this fragment
         parentLoginBinding = FragmentParentLoginBinding
             .inflate(inflater, container, false);
-        parentRegistrationFragment = new ParentRegistrationFragment();
+        parentRegistrationPersonalInfoFragment = new ParentRegistrationPersonalInfoFragment();
 
         parentLoginBinding.loginToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Objects.requireNonNull(getActivity())
                     .getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.registration_frame_layout, parentRegistrationFragment)
+                    .replace(R.id.registration_frame_layout, parentRegistrationPersonalInfoFragment)
                     .commit();
             }
         });

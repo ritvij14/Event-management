@@ -9,15 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.event_management.R;
-import com.example.event_management.databinding.FragmentParentRegistrationBinding;
+import com.example.event_management.databinding.FragmentParentRegistrationPersonalInfoBinding;
 
 import java.util.Objects;
 
-public class ParentRegistrationFragment extends Fragment {
+public class ParentRegistrationPersonalInfoFragment extends Fragment {
 
-    FragmentParentRegistrationBinding registrationBinding;
+    FragmentParentRegistrationPersonalInfoBinding infoBinding;
     ParentLoginFragment parentLoginFragment;
-    public ParentRegistrationFragment() {
+    public ParentRegistrationPersonalInfoFragment() {
         // Required empty public constructor
     }
 
@@ -25,11 +25,11 @@ public class ParentRegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        registrationBinding = FragmentParentRegistrationBinding
+        infoBinding = FragmentParentRegistrationPersonalInfoBinding
             .inflate(inflater, container, false);
         parentLoginFragment = new ParentLoginFragment();
 
-        registrationBinding.registerToLogin.setOnClickListener(new View.OnClickListener() {
+        infoBinding.registerToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Objects.requireNonNull(getActivity())
@@ -38,12 +38,12 @@ public class ParentRegistrationFragment extends Fragment {
                     .commit();
             }
         });
-        return registrationBinding.getRoot();
+        return infoBinding.getRoot();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        registrationBinding = null;
+        infoBinding = null;
     }
 }
