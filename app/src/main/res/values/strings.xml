@@ -19,4 +19,15 @@
     <string name="next">Next</string>
     <string name="already_registered">Already registered?</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="registration_complete">Registration complete!</string>
+    <string name="registration_successful_message">You have successfully registered with us. You can now add your childrens’ information for convenience while registering for a commpetition.</string>
+    <string name="add_child">Add Child</string>
+    <string name="full_name">Full name</string>
+    <string name="age">Age</string>
+    <string name="school">School</string>
+    <string name="add">Add</string>
+    <string name="skip_for_now">Skip for now</string>
+    <string name="child_name">Child Name</string>
+    <string name="child_age">Child age</string>
+    <string name="child_school">Child school</string>
 </resources>
