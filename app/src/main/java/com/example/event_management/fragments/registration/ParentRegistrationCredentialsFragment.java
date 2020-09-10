@@ -7,13 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.event_management.R;
 import com.example.event_management.databinding.FragmentParentRegistrationCredentialsBinding;
 
+import java.util.Objects;
+
 public class ParentRegistrationCredentialsFragment extends Fragment {
 
     FragmentParentRegistrationCredentialsBinding credentialsBinding;
+    ParentRegistrationAddChild addChildFragment;
+    String parentEmail;
+    String parentPassword;
+    String parentConfirmPassword;
     public ParentRegistrationCredentialsFragment() {
         // Required empty public constructor
     }
@@ -24,6 +31,52 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
         // Inflate the layout for this fragment
         credentialsBinding = FragmentParentRegistrationCredentialsBinding
             .inflate(inflater, container, false);
+        addChildFragment = new ParentRegistrationAddChild();
+
+        credentialsBinding.registerTwoNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parentEmail = Objects.requireNonNull(credentialsBinding
+                    .emailField.getText()).toString();
+                parentPassword = Objects.requireNonNull(credentialsBinding
+                    .passwordField.getText()).toString();
+                parentConfirmPassword = Objects.requireNonNull(credentialsBinding
+                    .confirmPasswordField.getText()).toString();
+
+                if (checkCredentials(parentEmail, parentPassword, parentConfirmPassword)) {
+                    Objects.requireNonNull(getActivity())
+                        .getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.registration_frame_layout, addChildFragment)
+                        .addToBackStack(null)
+                        .commit();
+                }
+            }
+        });
         return credentialsBinding.getRoot();
+    }
+
+    private boolean checkCredentials(String email, String password, String confirmPassword) {
+
+        if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter all credentials", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter an email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter a password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (confirmPassword.isEmpty()) {
+            Toast.makeText(getContext(), "Please confirm your password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }

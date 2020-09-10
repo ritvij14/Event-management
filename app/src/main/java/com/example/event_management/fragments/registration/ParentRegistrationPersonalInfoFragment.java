@@ -17,6 +17,7 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
 
     FragmentParentRegistrationPersonalInfoBinding infoBinding;
     ParentLoginFragment parentLoginFragment;
+    ParentRegistrationCredentialsFragment credentialsFragment;
     public ParentRegistrationPersonalInfoFragment() {
         // Required empty public constructor
     }
@@ -28,6 +29,21 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
         infoBinding = FragmentParentRegistrationPersonalInfoBinding
             .inflate(inflater, container, false);
         parentLoginFragment = new ParentLoginFragment();
+        credentialsFragment = new ParentRegistrationCredentialsFragment();
+
+        infoBinding.registerOneNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!Objects.requireNonNull(infoBinding.parentNameField.getText())
+                    .toString().isEmpty()) {
+                    Objects.requireNonNull(getActivity())
+                        .getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.registration_frame_layout, credentialsFragment)
+                        .addToBackStack(null)
+                        .commit();
+                }
+            }
+        });
 
         infoBinding.registerToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
