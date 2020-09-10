@@ -16,6 +16,8 @@
             android:layout_centerInParent="true"
             android:backgroundTint="@color/colorAccent"
             android:padding="50dp"
+            android:id="@+id/add_child_info_card"
+            android:visibility="gone"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -107,10 +109,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="15dp"
-                    android:id="@+id/add_child_info"
+                    android:id="@+id/add_child_info_button"
                     android:text="@string/add"
                     android:textColor="@color/colorAccent"
                     android:backgroundTint="@color/white"
+                    android:background="@color/white"
                     android:fontFamily="@font/montserrat_medium"
                     android:textSize="14sp"
                     android:textAllCaps="false"
@@ -173,7 +176,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="40dp"
                 android:id="@+id/child_list" />

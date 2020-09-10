@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.event_management.R;
 import com.example.event_management.databinding.FragmentParentRegistrationPersonalInfoBinding;
@@ -41,6 +42,8 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
                         .replace(R.id.registration_frame_layout, credentialsFragment)
                         .addToBackStack(null)
                         .commit();
+                } else {
+                    Toast.makeText(getContext(), "Please enter details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

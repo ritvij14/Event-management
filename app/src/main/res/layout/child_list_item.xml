@@ -2,7 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/child_name"
                 android:text="@string/child_name"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="14sp"
@@ -27,6 +29,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/child_age"
                 android:layout_marginTop="5dp"
                 android:text="@string/child_age"
                 android:fontFamily="@font/montserrat_regular"
@@ -36,6 +39,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/child_school"
                 android:layout_marginTop="5dp"
                 android:text="@string/child_school"
                 android:fontFamily="@font/montserrat_regular"
