@@ -1,5 +1,6 @@
 package com.example.event_management.fragments.registration;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.event_management.R;
+import com.example.event_management.activities.MainActivity;
 import com.example.event_management.databinding.FragmentParentLoginBinding;
 
 import java.util.Objects;
@@ -39,6 +41,14 @@ public class ParentLoginFragment extends Fragment {
                     .getSupportFragmentManager().beginTransaction()
                     .replace(R.id.registration_frame_layout, parentRegistrationPersonalInfoFragment)
                     .commit();
+            }
+        });
+
+        parentLoginBinding.login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                Objects.requireNonNull(getActivity()).finish();
             }
         });
         return parentLoginBinding.getRoot();
