@@ -15,6 +15,7 @@
         android:layout_gravity= "start"
         android:fitsSystemWindows="true"
         android:paddingTop="20dp"
+        android:id="@+id/nav_view"
         app:itemTextAppearance="@style/side_nav_menu_text_style"
         app:headerLayout="@layout/side_nav_header"
         app:menu="@menu/side_navigation"/>
