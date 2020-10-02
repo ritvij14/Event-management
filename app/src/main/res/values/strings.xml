@@ -35,4 +35,23 @@
     <string name="hi_person">Hi, person</string>
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
+    <string name="lead_the_change">Lead the Change</string>
+    <string name="drawing">Drawing</string>
+    <string name="date_string">17th September</string>
+    <string name="start">Start:</string>
+    <string name="dummy_start_time">9:30 a.m.</string>
+    <string name="end">End:</string>
+    <string name="dummy_end_time">1:30 p.m.</string>
+    <string name="first_prize_is">First prize is Rs 1000/-</string>
+    <string name="second_prize">Second prize is Rs 750/-</string>
+    <string name="third_prize_is">Third prize is Rs 500/-</string>
+    <string name="judges_instructions_heading_text">Judges Instructions:</string>
+    <string name="the_rules_of_the_competition_are_as_following">The rules of the competition are as following:</string>
+    <string name="rule1_text">1. Lorem Ipsum</string>
+    <string name="rule2_text">2. Lorem Ipsum</string>
+    <string name="rule3_text">3. Lorem Ipsum</string>
+    <string name="topics_will_be_disclosed_on_the_day_of_competition">* Topics will be disclosed on the day of competition</string>
+    <string name="fees_details">Fees Details:</string>
+    <string name="dummy_fees">Rs 100/-</string>
+    <string name="do_not_combine_multiple_registration">Do not combine multiple registration fees. Pay separate fees for sibling participant.</string>
 </resources>

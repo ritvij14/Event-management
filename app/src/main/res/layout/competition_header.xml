@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingStart="30dp"
+        tools:ignore="RtlSymmetry">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lead_the_change"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold"
+            android:id="@+id/competition_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawing"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:id="@+id/category"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="40dp"
+        android:paddingTop="30dp"
+        android:gravity="end"
+        tools:ignore="RtlSymmetry">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_string"
+            android:id="@+id/date"
+            android:textColor="@color/dark_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="14sp"
+                android:layout_marginEnd="5dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dummy_start_time"
+                android:id="@+id/start_time"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="14sp"
+                android:layout_marginEnd="5dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dummy_end_time"
+                android:id="@+id/end_time"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
