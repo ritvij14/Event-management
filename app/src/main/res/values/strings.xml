@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Event-management</string>
     <string name="club_name">Inner Wheel Club of Vasco-Da-Gama</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -55,4 +55,14 @@
     <string name="dummy_fees">Rs 100/-</string>
     <string name="do_not_combine_multiple_registration">Do not combine multiple registration fees. Pay separate fees for sibling participant.</string>
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</string>
+    <string name="results">Results:</string>
+    <string name="age_grp_1" tools:ignore="TypographyDashes">Ages 8-11:</string>
+    <string name="first_place">First Place:</string>
+    <string name="nipun_aggarwal">Nipun Aggarwal</string>
+    <string name="rs_1000">Rs 1000/-</string>
+    <string name="second_place">Second Place:</string>
+    <string name="harsh_nigam">Harsh Nigam</string>
+    <string name="rs_500">Rs 500/-</string>
+    <string name="rs_750">Rs 750/-</string>
+    <string name="ritviz">Ritviz</string>
 </resources>
