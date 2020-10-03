@@ -1,4 +1,4 @@
-package com.example.event_management.fragments.upcoming;
+package com.example.event_management.fragments.competition;
 
 import android.os.Bundle;
 
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.event_management.R;
 import com.example.event_management.databinding.FragmentUpcomingCompIntroBinding;
 
 public class UpcomingCompIntroFragment extends Fragment {
