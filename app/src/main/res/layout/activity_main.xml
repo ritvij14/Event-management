@@ -19,4 +19,9 @@
         app:itemTextAppearance="@style/side_nav_menu_text_style"
         app:headerLayout="@layout/side_nav_header"
         app:menu="@menu/side_navigation"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_frame_layout" />
 </androidx.drawerlayout.widget.DrawerLayout>
