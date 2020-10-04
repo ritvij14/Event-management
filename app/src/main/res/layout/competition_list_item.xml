@@ -22,6 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lead_the_change"
+                android:id="@+id/competition_title"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -30,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_string"
+                android:id="@+id/competition_date"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -39,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/drawing"
+                android:id="@+id/competition_category"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
