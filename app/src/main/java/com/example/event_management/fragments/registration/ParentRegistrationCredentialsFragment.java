@@ -18,9 +18,6 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
 
     FragmentParentRegistrationCredentialsBinding credentialsBinding;
     ParentRegistrationAddChild addChildFragment;
-    String parentEmail;
-    String parentPassword;
-    String parentConfirmPassword;
     public ParentRegistrationCredentialsFragment() {
         // Required empty public constructor
     }
@@ -36,11 +33,11 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
         credentialsBinding.registerTwoNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                parentEmail = Objects.requireNonNull(credentialsBinding
+                String parentEmail = Objects.requireNonNull(credentialsBinding
                     .emailField.getText()).toString();
-                parentPassword = Objects.requireNonNull(credentialsBinding
+                String parentPassword = Objects.requireNonNull(credentialsBinding
                     .passwordField.getText()).toString();
-                parentConfirmPassword = Objects.requireNonNull(credentialsBinding
+                String parentConfirmPassword = Objects.requireNonNull(credentialsBinding
                     .confirmPasswordField.getText()).toString();
 
                 if (checkCredentials(parentEmail, parentPassword, parentConfirmPassword)) {
@@ -57,23 +54,28 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
 
     private boolean checkCredentials(String email, String password, String confirmPassword) {
 
-        if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+        if (email.matches("") && password.matches("") && confirmPassword.matches("")) {
             Toast.makeText(getContext(), "Please enter all credentials", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (email.isEmpty()) {
+        if (email.matches("")) {
             Toast.makeText(getContext(), "Please enter an email", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (password.isEmpty()) {
+        if (password.matches("")) {
             Toast.makeText(getContext(), "Please enter a password", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (confirmPassword.isEmpty()) {
+        if (confirmPassword.matches("")) {
             Toast.makeText(getContext(), "Please confirm your password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!(password.equals(confirmPassword))) {
+            Toast.makeText(getContext(), "Please enter the same password.", Toast.LENGTH_SHORT).show();
             return false;
         }
 
