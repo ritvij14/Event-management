@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.event_management.R;
 import com.example.event_management.databinding.FragmentParentRegistrationPersonalInfoBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class ParentRegistrationPersonalInfoFragment extends Fragment {
@@ -24,7 +26,7 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         infoBinding = FragmentParentRegistrationPersonalInfoBinding
@@ -32,31 +34,37 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
         parentLoginFragment = new ParentLoginFragment();
         credentialsFragment = new ParentRegistrationCredentialsFragment();
 
-        infoBinding.registerOneNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!Objects.requireNonNull(infoBinding.parentNameField.getText())
-                    .toString().isEmpty()) {
-                    Objects.requireNonNull(getActivity())
-                        .getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.registration_frame_layout, credentialsFragment)
-                        .addToBackStack(null)
-                        .commit();
-                } else {
-                    Toast.makeText(getContext(), "Please enter details", Toast.LENGTH_SHORT).show();
-                }
+        infoBinding.registerOneNext.setOnClickListener(view -> {
+            String name = Objects.requireNonNull(infoBinding.parentNameField.getText())
+                    .toString();
+            String contactNumber = Objects.requireNonNull(infoBinding.phoneField.getText())
+                    .toString();
+            String address = Objects.requireNonNull(infoBinding.addressField.getText())
+                    .toString();
+            String city = Objects.requireNonNull(infoBinding.cityField.getText())
+                    .toString();
+            String state = Objects.requireNonNull(infoBinding.stateField.getText())
+                    .toString();
+
+            if (name.matches("") || contactNumber.matches("") || address.matches("")
+                || city.matches("") || state.matches("")) {
+
+                Objects.requireNonNull(getActivity())
+                    .getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.registration_frame_layout, credentialsFragment)
+                    .addToBackStack(null)
+                    .commit();
+            } else {
+                Toast.makeText(getContext(), "Please enter all details.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        infoBinding.registerToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Objects.requireNonNull(getActivity())
-                    .getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.registration_frame_layout, parentLoginFragment)
-                    .commit();
-            }
-        });
+        infoBinding.registerToLogin.setOnClickListener(view ->
+            Objects.requireNonNull(getActivity())
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.registration_frame_layout, parentLoginFragment)
+                .commit());
+
         return infoBinding.getRoot();
     }
 

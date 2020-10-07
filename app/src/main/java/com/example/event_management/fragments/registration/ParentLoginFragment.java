@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.example.event_management.activities.MainActivity;
 import com.example.event_management.api.RetrofitClient;
 import com.example.event_management.api.models.ParentLogin;
 import com.example.event_management.databinding.FragmentParentLoginBinding;
-import com.example.event_management.models.LoginAPIModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +30,6 @@ public class ParentLoginFragment extends Fragment {
 
     FragmentParentLoginBinding parentLoginBinding;
     ParentRegistrationPersonalInfoFragment parentRegistrationPersonalInfoFragment;
-    ParentLogin parent;
     public ParentLoginFragment() {
         // Required empty public constructor
     }
