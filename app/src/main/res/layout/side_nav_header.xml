@@ -20,10 +20,11 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hi_person"
+        android:text="@string/hi_nipun"
         android:paddingStart="25dp"
         android:fontFamily="@font/montserrat_bold"
         android:textSize="24sp"
         android:textColor="@color/colorAccent"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        tools:ignore="RtlSymmetry" />
 </LinearLayout>

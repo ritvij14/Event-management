@@ -7,27 +7,39 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.event_management.R;
 import com.example.event_management.activities.MainActivity;
+import com.example.event_management.api.RetrofitClient;
+import com.example.event_management.api.models.ParentLogin;
 import com.example.event_management.databinding.FragmentParentLoginBinding;
+import com.example.event_management.models.LoginAPIModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ParentLoginFragment extends Fragment {
 
     FragmentParentLoginBinding parentLoginBinding;
     ParentRegistrationPersonalInfoFragment parentRegistrationPersonalInfoFragment;
+    ParentLogin parent;
     public ParentLoginFragment() {
         // Required empty public constructor
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         parentLoginBinding = FragmentParentLoginBinding
@@ -44,14 +56,58 @@ public class ParentLoginFragment extends Fragment {
             }
         });
 
-        parentLoginBinding.login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                Objects.requireNonNull(getActivity()).finish();
+        parentLoginBinding.login.setOnClickListener(view -> {
+            String email = Objects.requireNonNull(parentLoginBinding.emailField.getText())
+                    .toString();
+            String password = Objects.requireNonNull(parentLoginBinding.passwordField.getText())
+                    .toString();
+
+            if (checkFields(email, password)) {
+                Call<ParentLogin> call = RetrofitClient.getClient().getParentLoginToken(email, password);
+                call.enqueue(new Callback<ParentLogin>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ParentLogin> call, @NotNull Response<ParentLogin> response) {
+                        ParentLogin parentLogin = response.body();
+                        if (parentLogin != null) {
+                            if (parentLogin.getSuccess()) {
+                                Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                Objects.requireNonNull(getActivity()).finish();
+                            }
+                        } else {
+                            // show error message
+                            Toast.makeText(getContext(), "Login unsuccessful!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ParentLogin> call, @NotNull Throwable t) {
+                        // show error message
+                        Toast.makeText(getContext(), "Login unsuccessful! Please check your connection.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         return parentLoginBinding.getRoot();
+    }
+
+    private boolean checkFields(String email, String password) {
+        if (email.matches("") && password.matches("")) {
+            Toast.makeText(getContext(), "Please enter your credentials", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.matches("")) {
+            Toast.makeText(getContext(), "Please enter your email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.matches("")) {
+            Toast.makeText(getContext(), "Please enter your password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
