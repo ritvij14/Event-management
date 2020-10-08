@@ -2,6 +2,7 @@ package com.example.event_management.api;
 
 import com.example.event_management.api.models.GetCompetitions;
 import com.example.event_management.api.models.ParentLogin;
+import com.example.event_management.api.models.ParticipantsResponse;
 import com.example.event_management.api.models.SignUpResponse;
 
 import retrofit2.Call;
@@ -26,6 +27,16 @@ public interface RetrofitAPIInterface {
                                       @Field("address") String address,
                                       @Field("phone_number") String phoneNumber,
                                       @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("participant/register")
+    Call<Object> addParticipant(@Header("token") String token,
+                          @Field("name") String childName,
+                          @Field("age") String age,
+                          @Field("school") String school);
+
+    @GET("participant/fetch")
+    Call<ParticipantsResponse> getParticipants(@Header("token") String token);
 
     @GET("competition/all")
     Call<GetCompetitions> getCompetitionList(@Header("token") String token);
