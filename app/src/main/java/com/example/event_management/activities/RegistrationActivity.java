@@ -26,7 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
         loginFragment = new ParentLoginFragment();
         sharedPrefs = new SharedPrefs(this);
 
-        if (sharedPrefs.getUserAuthStatus().equals("SIGNED_IN")) {
+        if (sharedPrefs.getUserAuthStatus() != null) {
             startActivity(new Intent(this, MainActivity.class));
         } else {
             getSupportFragmentManager().beginTransaction()

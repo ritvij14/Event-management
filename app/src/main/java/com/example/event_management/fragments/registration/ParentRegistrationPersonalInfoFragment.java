@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.event_management.R;
 import com.example.event_management.databinding.FragmentParentRegistrationPersonalInfoBinding;
+import com.example.event_management.utils.SharedPrefs;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +22,7 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
     FragmentParentRegistrationPersonalInfoBinding infoBinding;
     ParentLoginFragment parentLoginFragment;
     ParentRegistrationCredentialsFragment credentialsFragment;
+    SharedPrefs sharedPrefs;
     public ParentRegistrationPersonalInfoFragment() {
         // Required empty public constructor
     }
@@ -33,6 +35,7 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
             .inflate(inflater, container, false);
         parentLoginFragment = new ParentLoginFragment();
         credentialsFragment = new ParentRegistrationCredentialsFragment();
+        sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
 
         infoBinding.registerOneNext.setOnClickListener(view -> {
             String name = Objects.requireNonNull(infoBinding.parentNameField.getText())
@@ -46,9 +49,13 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
             String state = Objects.requireNonNull(infoBinding.stateField.getText())
                     .toString();
 
-            if (name.matches("") || contactNumber.matches("") || address.matches("")
-                || city.matches("") || state.matches("")) {
+            if (checkFields(name, contactNumber, address, city, state)) {
 
+                sharedPrefs.setName(name);
+                sharedPrefs.setContactNumber(contactNumber);
+                sharedPrefs.setAddress(address);
+                sharedPrefs.setCity(city);
+                sharedPrefs.setState(state);
                 Objects.requireNonNull(getActivity())
                     .getSupportFragmentManager().beginTransaction()
                     .replace(R.id.registration_frame_layout, credentialsFragment)
@@ -66,6 +73,36 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
                 .commit());
 
         return infoBinding.getRoot();
+    }
+
+    private boolean checkFields(String name, String contactNumber, String address, String city, String state) {
+
+        if (name.matches("")) {
+            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (contactNumber.matches("")) {
+            Toast.makeText(getContext(), "Please enter your contact number", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (address.matches("")) {
+            Toast.makeText(getContext(), "Please enter your address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (city.matches("")) {
+            Toast.makeText(getContext(), "Please enter your city", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (state.matches("")) {
+            Toast.makeText(getContext(), "Please enter your state", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
