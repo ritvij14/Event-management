@@ -17,6 +17,7 @@ import com.example.event_management.activities.MainActivity;
 import com.example.event_management.api.RetrofitClient;
 import com.example.event_management.api.models.ParentLogin;
 import com.example.event_management.databinding.FragmentParentLoginBinding;
+import com.example.event_management.utils.SharedPrefs;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +31,7 @@ public class ParentLoginFragment extends Fragment {
 
     FragmentParentLoginBinding parentLoginBinding;
     ParentRegistrationPersonalInfoFragment parentRegistrationPersonalInfoFragment;
+    private SharedPrefs sharedPrefs;
     public ParentLoginFragment() {
         // Required empty public constructor
     }
@@ -42,6 +44,7 @@ public class ParentLoginFragment extends Fragment {
         parentLoginBinding = FragmentParentLoginBinding
             .inflate(inflater, container, false);
         parentRegistrationPersonalInfoFragment = new ParentRegistrationPersonalInfoFragment();
+        sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
 
         parentLoginBinding.loginToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +70,8 @@ public class ParentLoginFragment extends Fragment {
                         ParentLogin parentLogin = response.body();
                         if (parentLogin != null) {
                             if (parentLogin.getSuccess()) {
+                                sharedPrefs.setToken(parentLogin.getAuthToken());
+                                sharedPrefs.setUserAuthStatus("SIGNED_IN");
                                 Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext(), MainActivity.class));
                                 Objects.requireNonNull(getActivity()).finish();
