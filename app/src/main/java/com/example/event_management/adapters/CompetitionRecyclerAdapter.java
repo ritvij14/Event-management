@@ -38,6 +38,7 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
         holder.compTitle.setText(competition.getCompetitionName());
         holder.compDate.setText(competition.getDate());
         holder.compCategory.setText(competition.getCategory());
+        holder.state = competition.getState();
     }
 
     @Override
@@ -45,6 +46,7 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
 
     class ViewHolder extends RecyclerView.ViewHolder {
         MaterialTextView compTitle, compDate, compCategory;
+        String state;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             compTitle = itemView.findViewById(R.id.competition_title);
