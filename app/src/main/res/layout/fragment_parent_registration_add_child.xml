@@ -14,13 +14,14 @@
         tools:ignore="UselessParent">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="275dp"
+            android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:backgroundTint="@color/colorAccent"
             android:padding="50dp"
             android:id="@+id/add_child_info_card"
             android:visibility="gone"
+            app:cardElevation="10dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
