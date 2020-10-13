@@ -1,5 +1,6 @@
 package com.example.event_management.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -42,11 +43,14 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+
+        homeBinding.homeGreetingText.setText("Hi " + sharedPrefs.getName());
 
         fetchCompetitions();
         return homeBinding.getRoot();
@@ -93,7 +97,7 @@ public class HomeFragment extends Fragment {
                 registeredCompetitions,
                 getContext()
         );
-        homeBinding.pastEventsRv.setAdapter(registeredCompetitionRvAdapter);
+        homeBinding.registeredEventsRv.setAdapter(registeredCompetitionRvAdapter);
         registeredCompetitionRvAdapter.notifyDataSetChanged();
     }
 
@@ -121,27 +125,27 @@ public class HomeFragment extends Fragment {
                                             competition.getTitle(),
                                             competition.getStartTime(),
                                             competition.getCategory(),
-                                            competition.getState()
+                                            competition.getCompetitionID()
                                     );
                                     upcomingCompetitions.add(competitionListItem);
                                 }
 
-                                if (competition.getState().equals("REGISTERED")) {
+                                if (competition.getState().equals("ONGOING")) {
                                     CompetitionListItem competitionListItem = new CompetitionListItem(
                                             competition.getTitle(),
                                             competition.getStartTime(),
                                             competition.getCategory(),
-                                            competition.getState()
+                                            competition.getCompetitionID()
                                     );
                                     registeredCompetitions.add(competitionListItem);
                                 }
 
-                                if (competition.getState().equals("PAST")) {
+                                if (competition.getState().equals("COMPLETED")) {
                                     CompetitionListItem competitionListItem = new CompetitionListItem(
                                             competition.getTitle(),
                                             competition.getStartTime(),
                                             competition.getCategory(),
-                                            competition.getState()
+                                            competition.getCompetitionID()
                                     );
                                     pastCompetitions.add(competitionListItem);
                                 }

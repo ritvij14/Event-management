@@ -5,13 +5,13 @@ public class CompetitionListItem {
     String competitionName;
     String date;
     String category;
-    String state;
+    String id;
 
-    public CompetitionListItem(String competitionName, String date, String category, String state) {
+    public CompetitionListItem(String competitionName, String date, String category, String id) {
         this.competitionName = competitionName;
         this.date = date;
         this.category = category;
-        this.state = state;
+        this.id = id;
     }
 
     public String getCompetitionName() {
@@ -26,5 +26,5 @@ public class CompetitionListItem {
         return category;
     }
 
-    public String getState() { return state; }
+    public String getId() { return id; }
 }

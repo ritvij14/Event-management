@@ -79,6 +79,7 @@ public class ParentLoginFragment extends Fragment {
                         } else {
                             // show error message
                             Toast.makeText(getContext(), "Login unsuccessful!", Toast.LENGTH_SHORT).show();
+                            sharedPrefs.setUserAuthStatus(null);
                         }
                     }
 

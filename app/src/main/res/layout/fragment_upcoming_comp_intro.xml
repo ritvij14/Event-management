@@ -25,11 +25,13 @@
         <include
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:id="@+id/competition_header"
             layout="@layout/competition_header" />
 
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/prize_list_body"
             layout="@layout/prize_list" />
 
         <include
@@ -59,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_fees"
+                android:id="@+id/fees_amount"
                 android:textAlignment="textEnd"
                 android:fontFamily="@font/montserrat_medium"
                 android:textSize="17sp"

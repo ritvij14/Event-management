@@ -1,6 +1,9 @@
 package com.example.event_management.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.event_management.R;
+import com.example.event_management.activities.CompetitionActivity;
 import com.example.event_management.models.CompetitionListItem;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -38,7 +42,16 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
         holder.compTitle.setText(competition.getCompetitionName());
         holder.compDate.setText(competition.getDate());
         holder.compCategory.setText(competition.getCategory());
-        holder.state = competition.getState();
+        holder.id = competition.getId();
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent compIntent = new Intent(context, CompetitionActivity.class);
+            Bundle b = new Bundle();
+            b.putString("ID", holder.id);
+            Log.d("ADAPTER", holder.id);
+            compIntent.putExtras(b);
+            context.startActivity(compIntent);
+        });
     }
 
     @Override
@@ -46,7 +59,7 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
 
     class ViewHolder extends RecyclerView.ViewHolder {
         MaterialTextView compTitle, compDate, compCategory;
-        String state;
+        String id;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             compTitle = itemView.findViewById(R.id.competition_title);

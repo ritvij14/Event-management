@@ -1,9 +1,13 @@
 package com.example.event_management.api;
 
+import com.example.event_management.api.models.Competition;
 import com.example.event_management.api.models.GetCompetitions;
 import com.example.event_management.api.models.ParentLogin;
 import com.example.event_management.api.models.ParticipantsResponse;
+import com.example.event_management.api.models.SelectCompetition;
 import com.example.event_management.api.models.SignUpResponse;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -11,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface RetrofitAPIInterface {
 
@@ -40,4 +45,7 @@ public interface RetrofitAPIInterface {
 
     @GET("competition/all")
     Call<GetCompetitions> getCompetitionList(@Header("token") String token);
+
+    @GET("competition/{id}")
+    Call<SelectCompetition> getSelectedCompetition(@Header("token") String token, @Path("id") String id);
 }

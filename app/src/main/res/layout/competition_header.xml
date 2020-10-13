@@ -15,23 +15,23 @@
         tools:ignore="RtlSymmetry">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/competition_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lead_the_change"
-            android:textSize="17sp"
-            android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"
-            android:id="@+id/competition_name" />
+            android:text="@string/lead_the_change"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drawing"
-            android:textSize="12sp"
-            android:textColor="@color/colorAccent"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_extra_bold"
-            android:id="@+id/category"
-            android:layout_marginTop="5dp" />
+            android:text="@string/drawing"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout

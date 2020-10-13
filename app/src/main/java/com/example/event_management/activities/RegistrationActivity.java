@@ -26,12 +26,12 @@ public class RegistrationActivity extends AppCompatActivity {
         loginFragment = new ParentLoginFragment();
         sharedPrefs = new SharedPrefs(this);
 
-        if (sharedPrefs.getUserAuthStatus() != null) {
+        /*if (sharedPrefs.getUserAuthStatus() != null) {
             startActivity(new Intent(this, MainActivity.class));
-        } else {
+        } else {*/
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.registration_frame_layout, loginFragment)
                     .commit();
-        }
+        // }
     }
 }
