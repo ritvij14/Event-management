@@ -98,6 +98,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/continue_to_payment"
+            android:id="@+id/pay"
             android:textAllCaps="false"
             android:fontFamily="@font/montserrat_medium"
             android:layout_marginHorizontal="30dp"
