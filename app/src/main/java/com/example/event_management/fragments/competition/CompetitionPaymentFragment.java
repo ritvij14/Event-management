@@ -101,7 +101,7 @@ public class CompetitionPaymentFragment extends Fragment {
         Uri uri = new Uri.Builder()
                 .scheme("upi")
                 .authority("pay")
-                .appendQueryParameter("pa","vaib2641@okaxis") // To be changed to the UPI provided
+                .appendQueryParameter("pa","pragatiganatra@okhdfcbank") // To be changed to the UPI provided
                 .appendQueryParameter("tn","Registration Fee")
                 .appendQueryParameter("tr","12345678") // After initiating transaction, your id goes here
                 .appendQueryParameter("am","5.00") // Set the amount as the registration fee for the competition
