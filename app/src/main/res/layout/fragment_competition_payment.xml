@@ -3,12 +3,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.competition.CompetitionPaymentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/back_button"
+            android:background="@color/white"
+            android:id="@+id/back_button"
+            tools:ignore="ContentDescription" />
+
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/competition_header"
+            layout="@layout/competition_header" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/participant_details"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/child_name"
+            android:id="@+id/participant_info_name"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/age"
+            android:id="@+id/participant_info_age"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/school"
+            android:id="@+id/participant_info_school"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lorem ipsum"
+            android:id="@+id/age_group_info"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lorem ipsum"
+            android:id="@+id/age_group_theme_info"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/continue_to_payment"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginHorizontal="30dp"
+            app:cornerRadius="15dp"/>
+    </LinearLayout>
 </FrameLayout>

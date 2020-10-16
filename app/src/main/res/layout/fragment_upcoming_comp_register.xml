@@ -3,12 +3,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.competition.UpcomingCompRegisterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/back_button"
+            android:background="@color/white"
+            android:id="@+id/back_button"
+            tools:ignore="ContentDescription" />
+
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/competition_header"
+            layout="@layout/competition_header" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_participant"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/participant_name_layout"
+            android:hint="@string/full_name"
+            android:layout_marginHorizontal="40dp"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/participant_name_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/roboto_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/participant_school_layout"
+            android:hint="@string/school"
+            android:layout_marginHorizontal="40dp"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/participant_school_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/roboto_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/participant_age_layout"
+            android:hint="@string/age"
+            android:layout_marginHorizontal="40dp"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/participant_age_field"
+                android:maxLines="1"
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/roboto_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:id="@+id/add_child_info_button"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            app:cornerRadius="30dp"
+            style="@style/TextAppearance.MaterialComponents.Button" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saved_participants"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="40dp"
+            android:id="@+id/saved_participants_rv"/>
+    </LinearLayout>
 </FrameLayout>

@@ -4,63 +4,82 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.event_management.R;
+import com.example.event_management.api.RetrofitClient;
+import com.example.event_management.api.models.AgeGroup;
+import com.example.event_management.api.models.SelectCompetition;
+import com.example.event_management.databinding.FragmentCompetitionPaymentBinding;
+import com.example.event_management.utils.SharedPrefs;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CompetitionPaymentFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CompetitionPaymentFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CompetitionPaymentFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CompetitionPaymentFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CompetitionPaymentFragment newInstance(String param1, String param2) {
-        CompetitionPaymentFragment fragment = new CompetitionPaymentFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    FragmentCompetitionPaymentBinding paymentBinding;
+    String name, school, age;
+    SharedPrefs sharedPrefs;
+    String ageGroup = "Age Group: ";
+    String theme = "Theme: ";
+    public CompetitionPaymentFragment(String name, String school, String age) {
+        this.name = name;
+        this.school = school;
+        this.age = age;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_competition_payment, container, false);
+        paymentBinding = FragmentCompetitionPaymentBinding.inflate(inflater, container, false);
+        sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        paymentBinding.participantInfoName.setText(name);
+        paymentBinding.participantInfoAge.setText(age);
+        paymentBinding.participantInfoSchool.setText(school);
+
+        getAgeGroupInfo();
+        return paymentBinding.getRoot();
+    }
+
+    private void getAgeGroupInfo() {
+        String id = Objects.requireNonNull(Objects.requireNonNull(getActivity()).getIntent().getExtras()).getString("ID");
+        Call<SelectCompetition> call = RetrofitClient.getClient().getSelectedCompetition(sharedPrefs.getToken(), id);
+        call.enqueue(new Callback<SelectCompetition>() {
+            @Override
+            public void onResponse(Call<SelectCompetition> call, Response<SelectCompetition> response) {
+                SelectCompetition competition = response.body();
+                Log.d("SELECTED COMPETITION", competition.getCompetition().getTitle());
+                List<AgeGroup> ageGroups = competition.getCompetition().getAgeGroups();
+                int childAge = Integer.parseInt(age.substring(0, age.indexOf('y')));
+
+                for (AgeGroup group: ageGroups) {
+                    if (Integer.parseInt(group.getEndAge()) > childAge) {
+                        Log.d("PAYMENT_FRAGMENT", group.getName());
+                        ageGroup += group.getStartAge() + " to " + group.getEndAge() + " years";
+                        theme += group.getName();
+                        paymentBinding.ageGroupInfo.setText(ageGroup);
+                        paymentBinding.ageGroupThemeInfo.setText(theme);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SelectCompetition> call, Throwable t) {
+                Log.d("SELECTED COMPETITION", "failed");
+                Log.d("SELECTED COMPETITION", sharedPrefs.getToken());
+            }
+        });
     }
 }

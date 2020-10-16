@@ -1,66 +1,125 @@
 package com.example.event_management.fragments.competition;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.event_management.R;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpcomingCompRegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.event_management.adapters.SavedParticipantRecyclerAdapter;
+import com.example.event_management.api.RetrofitClient;
+import com.example.event_management.api.models.Participant;
+import com.example.event_management.api.models.ParticipantsResponse;
+import com.example.event_management.databinding.FragmentUpcomingCompRegisterBinding;
+import com.example.event_management.models.AddChildListItem;
+import com.example.event_management.utils.SharedPrefs;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class UpcomingCompRegisterFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    FragmentUpcomingCompRegisterBinding registerBinding;
+    SharedPrefs sharedPrefs;
+    ArrayList<AddChildListItem> childListItems;
+    SavedParticipantRecyclerAdapter participantRecyclerAdapter;
     public UpcomingCompRegisterFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpcomingCompRegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpcomingCompRegisterFragment newInstance(String param1, String param2) {
-        UpcomingCompRegisterFragment fragment = new UpcomingCompRegisterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming_comp_register, container, false);
+        registerBinding = FragmentUpcomingCompRegisterBinding.inflate(inflater, container, false);
+        sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        childListItems = new ArrayList<>();
+
+        registerBinding.savedParticipantsRv.setHasFixedSize(true);
+        registerBinding.savedParticipantsRv.setLayoutManager(new LinearLayoutManager(
+                getContext(),
+                RecyclerView.VERTICAL,
+                false
+        ));
+        fetchParticipants();
+        participantRecyclerAdapter = new SavedParticipantRecyclerAdapter(childListItems, getContext());
+        registerBinding.savedParticipantsRv.setAdapter(participantRecyclerAdapter);
+        participantRecyclerAdapter.notifyDataSetChanged();
+
+        registerBinding.addChildInfoButton.setOnClickListener(v -> {
+            String name = registerBinding.participantNameField.getText().toString();
+            String age = registerBinding.participantAgeField.getText().toString();
+            String school = registerBinding.participantSchoolField.getText().toString();
+            saveParticipant(name, age, school);
+        });
+
+        return registerBinding.getRoot();
+    }
+
+    private void saveParticipant(String name, String age, String school) {
+        if (name.matches("") || age.matches("") || school.matches("")) {
+            Toast.makeText(getContext(), "Please add complete info", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<Object> call = RetrofitClient.getClient().addParticipant(sharedPrefs.getToken(), name, age, school);
+        call.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(@NotNull Call<Object> call, @NotNull Response<Object> response) {
+                fetchParticipants();
+                childListItems.clear();
+                Toast.makeText(getContext(), "Your child has been registered", Toast.LENGTH_SHORT).show();
+                registerBinding.participantNameField.setText("");
+                registerBinding.participantAgeField.setText("");
+                registerBinding.participantSchoolField.setText("");
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<Object> call, @NotNull Throwable t) {
+                // error
+                Toast.makeText(getContext(), "Error registering child", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchParticipants() {
+        Call<ParticipantsResponse> call = RetrofitClient.getClient().getParticipants(sharedPrefs.getToken());
+        call.enqueue(new Callback<ParticipantsResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<ParticipantsResponse> call, @NotNull Response<ParticipantsResponse> response) {
+                ParticipantsResponse res = response.body();
+                if (res != null) {
+                    if (res.isSuccess()) {
+                        List<Participant> participants = res.getParticipants();
+                        for (Participant p: participants) {
+                            childListItems.add(new AddChildListItem(
+                                    p.getName(),
+                                    p.getAge(),
+                                    p.getSchoolName()
+                            ));
+                            participantRecyclerAdapter.notifyDataSetChanged();
+                        }
+                    }
+                } else {
+                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ParticipantsResponse> call, @NotNull Throwable t) {
+
+            }
+        });
     }
 }

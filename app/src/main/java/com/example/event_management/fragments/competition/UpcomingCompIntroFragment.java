@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.event_management.R;
 import com.example.event_management.api.RetrofitClient;
 import com.example.event_management.api.models.SelectCompetition;
 import com.example.event_management.databinding.FragmentUpcomingCompIntroBinding;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 public class UpcomingCompIntroFragment extends Fragment {
 
     FragmentUpcomingCompIntroBinding introBinding;
+    UpcomingCompRegisterFragment registerFragment;
     SharedPrefs sharedPrefs;
     private String firstPrize = "First prize is Rs ";
     private String secondPrize = "Second prize is Rs ";
@@ -47,8 +49,15 @@ public class UpcomingCompIntroFragment extends Fragment {
         id = Objects.requireNonNull(b).getString("ID");
         Log.d("INTRO FRAGMENT", id);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        registerFragment = new UpcomingCompRegisterFragment();
 
         fetchCompetitionData();
+
+        introBinding.registerForCompButton.setOnClickListener(v -> {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_competitions_frame, registerFragment)
+                    .commit();
+        });
 
         return introBinding.getRoot();
     }
@@ -79,7 +88,6 @@ public class UpcomingCompIntroFragment extends Fragment {
                 introBinding.prizeListBody.secondPrizeText.setText(secondPrize);
                 introBinding.prizeListBody.thirdPrizeText.setText(thirdPrize);
                 introBinding.feesAmount.setText(fees);
-                Toast.makeText(getContext(), fees, Toast.LENGTH_SHORT).show();
             }
 
             @Override
