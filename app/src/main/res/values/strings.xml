@@ -73,4 +73,5 @@
     <string name="saved_participants">Saved participants</string>
     <string name="participant_details">Participant Details</string>
     <string name="continue_to_payment">Continue to payment</string>
+    <string name="add_submission">Add submission</string>
 </resources>

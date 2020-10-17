@@ -106,7 +106,8 @@ public class UpcomingCompRegisterFragment extends Fragment {
                             childListItems.add(new AddChildListItem(
                                     p.getName(),
                                     p.getAge(),
-                                    p.getSchoolName()
+                                    p.getSchoolName(),
+                                    p.getId()
                             ));
                             participantRecyclerAdapter.notifyDataSetChanged();
                         }

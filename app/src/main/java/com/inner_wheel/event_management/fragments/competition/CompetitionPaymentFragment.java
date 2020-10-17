@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.inner_wheel.event_management.api.RetrofitClient;
 import com.inner_wheel.event_management.api.models.AgeGroup;
+import com.inner_wheel.event_management.api.models.RegistrationResponse;
 import com.inner_wheel.event_management.api.models.SelectCompetition;
+import com.inner_wheel.event_management.api.models.TransactionInitiate;
 import com.inner_wheel.event_management.databinding.FragmentCompetitionPaymentBinding;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
@@ -27,11 +29,12 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class CompetitionPaymentFragment extends Fragment {
 
     FragmentCompetitionPaymentBinding paymentBinding;
-    String name, school, age;
+    String name, school, age, compID, participantID, feeAmount, id, ageGroupID;
     SharedPrefs sharedPrefs;
     String ageGroup = "Age Group: ";
     String theme = "Theme: ";
@@ -39,10 +42,11 @@ public class CompetitionPaymentFragment extends Fragment {
     public static final String GOOGLE_PAY_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
     public static final int GOOGLE_PAY_REQUEST_CODE = 123;
 
-    public CompetitionPaymentFragment(String name, String school, String age) {
+    public CompetitionPaymentFragment(String name, String school, String age, String participantID) {
         this.name = name;
         this.school = school;
         this.age = age;
+        this.participantID = participantID;
     }
 
     @Override
@@ -54,10 +58,33 @@ public class CompetitionPaymentFragment extends Fragment {
         paymentBinding.participantInfoName.setText(name);
         paymentBinding.participantInfoAge.setText(age);
         paymentBinding.participantInfoSchool.setText(school);
-        paymentBinding.pay.setOnClickListener(view -> openGooglePay());
 
         getAgeGroupInfo();
+        paymentBinding.pay.setOnClickListener(view -> initiateTransaction());
+
         return paymentBinding.getRoot();
+    }
+
+    private void initiateTransaction() {
+        Call<TransactionInitiate> call = RetrofitClient.getClient()
+                .startTransaction(sharedPrefs.getToken(), compID, participantID, feeAmount);
+        call.enqueue(new Callback<TransactionInitiate>() {
+            @Override
+            public void onResponse(@NotNull Call<TransactionInitiate> call, @NotNull Response<TransactionInitiate> response) {
+                TransactionInitiate initiate = response.body();
+                if (initiate != null && initiate.isSuccess()) {
+                    id = initiate.getTransaction().getId();
+                    openGooglePay();
+                } else {
+                    Toast.makeText(getContext(), "Unable to initiate transaction", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<TransactionInitiate> call, @NotNull Throwable t) {
+                Toast.makeText(getContext(), "Unable to initiate transaction", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getAgeGroupInfo() {
@@ -67,6 +94,9 @@ public class CompetitionPaymentFragment extends Fragment {
             @Override
             public void onResponse(@NotNull Call<SelectCompetition> call, @NotNull Response<SelectCompetition> response) {
                 SelectCompetition competition = response.body();
+                compID = Objects.requireNonNull(competition).getCompetition().getCompId();
+                feeAmount = competition.getCompetition().getFees();
+
                 List<AgeGroup> ageGroups = competition != null ? competition.getCompetition().getAgeGroups() : null;
                 int childAge = Integer.parseInt(age.substring(0, age.indexOf('y')));
 
@@ -76,6 +106,7 @@ public class CompetitionPaymentFragment extends Fragment {
                             Log.d("PAYMENT_FRAGMENT", group.getName());
                             ageGroup += group.getStartAge() + " to " + group.getEndAge() + " years";
                             theme += group.getName();
+                            ageGroupID = group.getGrpId();
                             paymentBinding.ageGroupInfo.setText(ageGroup);
                             paymentBinding.ageGroupThemeInfo.setText(theme);
                             break;
@@ -101,7 +132,7 @@ public class CompetitionPaymentFragment extends Fragment {
                 .appendQueryParameter("tn","Test transaction")
 //                        .appendQueryParameter("mc","1234")
                 .appendQueryParameter("tr","12345678")
-                .appendQueryParameter("am","5.00")
+                .appendQueryParameter("am","0.00")
                 .appendQueryParameter("cu","INR")
 //                .appendQueryParameter("url","https://google.com")
                 .build();
@@ -119,21 +150,60 @@ public class CompetitionPaymentFragment extends Fragment {
         if(requestCode == GOOGLE_PAY_REQUEST_CODE) {
             try {
                 String status = null; // "SUCCESS" if transaction is successful, else "FAILURE"
+                String transactionId = "";
                 if (data != null) {
                     status = data.getStringExtra("Status");
-                    String transactionId = data.getStringExtra("txnId");
+                    transactionId = data.getStringExtra("txnId");
                 }
                 assert status != null;
-                if (status.equals("SUCCESS"))
+                if (status.equals("SUCCESS")) {
                     message = "Payment successful";
-                else
+                    updateTransaction(id, transactionId, "SUCCESSFUL");
+                } else{
                     message = "Payment Failed";
-                // TODO Make API call to update the transaction status to "SUCCESS" or "FAILURE"
+                }
             } catch (Exception e) {
                 message = "Some error occurred, could not open Google Pay";
             }
         }
         if(!message.equals(""))
             Toast.makeText(paymentBinding.getRoot().getContext(), message,Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateTransaction(String transID, String gpayID, String status) {
+
+        Call<TransactionInitiate> call = RetrofitClient.getClient().updateTransaction(sharedPrefs.getToken(), transID, gpayID, status);
+        call.enqueue(new Callback<TransactionInitiate>() {
+            @Override
+            public void onResponse(@NotNull Call<TransactionInitiate> call, @NotNull Response<TransactionInitiate> response) {
+                Log.d("TRANSACTION_UPDATE", "Update successful");
+                registerParticipant();
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<TransactionInitiate> call, @NotNull Throwable t) {
+
+            }
+        });
+    }
+
+    private void registerParticipant() {
+        Call<RegistrationResponse> call = RetrofitClient.getClient().registerParticipant(sharedPrefs.getToken(), ageGroupID, participantID, id);
+        call.enqueue(new Callback<RegistrationResponse>() {
+            @Override
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                RegistrationResponse res = response.body();
+                if (res != null) {
+                    Toast.makeText(getContext(), res.getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error registering participant", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Error registering participant", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

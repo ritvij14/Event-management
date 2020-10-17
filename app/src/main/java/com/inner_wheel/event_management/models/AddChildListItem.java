@@ -5,11 +5,13 @@ public class AddChildListItem {
     String name;
     String age;
     String school;
+    String id;
 
-    public AddChildListItem(String name, String age, String school) {
+    public AddChildListItem(String name, String age, String school, String id) {
         this.name = name;
         this.age = age;
         this.school = school;
+        this.id = id;
     }
 
     public String getName() {
@@ -24,6 +26,8 @@ public class AddChildListItem {
         return school;
     }
 
+    public String getId() { return id; }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -35,4 +39,6 @@ public class AddChildListItem {
     public void setSchool(String school) {
         this.school = school;
     }
+
+    public void setId(String id) { this.id = id; }
 }

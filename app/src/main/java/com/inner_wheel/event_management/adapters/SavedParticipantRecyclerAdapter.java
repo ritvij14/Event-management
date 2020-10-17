@@ -44,7 +44,8 @@ public class SavedParticipantRecyclerAdapter extends RecyclerView.Adapter<SavedP
                 .replace(R.id.main_competitions_frame, new CompetitionPaymentFragment(
                         child.getName(),
                         child.getSchool(),
-                        child.getAge()
+                        child.getAge(),
+                        child.getId()
                 ))
                 .commit());
     }
