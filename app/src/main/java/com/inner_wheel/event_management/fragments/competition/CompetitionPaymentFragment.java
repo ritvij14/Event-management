@@ -97,7 +97,7 @@ public class CompetitionPaymentFragment extends Fragment {
                 compID = Objects.requireNonNull(competition).getCompetition().getCompId();
                 feeAmount = competition.getCompetition().getFees();
 
-                List<AgeGroup> ageGroups = competition != null ? competition.getCompetition().getAgeGroups() : null;
+                List<AgeGroup> ageGroups = competition.getCompetition().getAgeGroups();
                 int childAge = Integer.parseInt(age.substring(0, age.indexOf('y')));
 
                 if (ageGroups != null) {

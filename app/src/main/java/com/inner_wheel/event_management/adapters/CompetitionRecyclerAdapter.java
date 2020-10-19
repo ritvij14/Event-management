@@ -21,10 +21,12 @@ import java.util.ArrayList;
 public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<CompetitionRecyclerAdapter.ViewHolder> {
 
     ArrayList<CompetitionListItem> competitionList;
+    private String compStatus;
     Context context;
 
-    public CompetitionRecyclerAdapter(ArrayList<CompetitionListItem> competitionList, Context context) {
+    public CompetitionRecyclerAdapter(ArrayList<CompetitionListItem> competitionList, String compStatus, Context context) {
         this.competitionList = competitionList;
+        this.compStatus = compStatus;
         this.context = context;
     }
 
@@ -48,6 +50,7 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
             Intent compIntent = new Intent(context, CompetitionActivity.class);
             Bundle b = new Bundle();
             b.putString("ID", holder.id);
+            b.putString("STATUS", compStatus);
             Log.d("ADAPTER", holder.id);
             compIntent.putExtras(b);
             context.startActivity(compIntent);

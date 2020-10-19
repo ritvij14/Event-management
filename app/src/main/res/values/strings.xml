@@ -73,5 +73,10 @@
     <string name="saved_participants">Saved participants</string>
     <string name="participant_details">Participant Details</string>
     <string name="continue_to_payment">Continue to payment</string>
-    <string name="add_submission">Add submission</string>
+    <string name="add_submission">Add submission for:</string>
+    <string name="ongoing_events">Ongoing events</string>
+    <string name="the_topics_are_as_follows">The topics are as follows:</string>
+    <string name="group_1">"Group 1: "</string>
+    <string name="group_2">"Group 2: "</string>
+    <string name="group_3">"Group 3: "</string>
 </resources>

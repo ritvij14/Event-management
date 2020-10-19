@@ -3,6 +3,7 @@ package com.inner_wheel.event_management.api;
 import com.inner_wheel.event_management.api.models.GetCompetitions;
 import com.inner_wheel.event_management.api.models.ParentLogin;
 import com.inner_wheel.event_management.api.models.ParticipantsResponse;
+import com.inner_wheel.event_management.api.models.RegisteredParticipants;
 import com.inner_wheel.event_management.api.models.RegistrationResponse;
 import com.inner_wheel.event_management.api.models.SelectCompetition;
 import com.inner_wheel.event_management.api.models.SignUpResponse;
@@ -69,4 +70,7 @@ public interface RetrofitAPIInterface {
                                     @Field("id") String id,
                                     @Field("transaction_id") String transactionID,
                                     @Field("transaction_status") String status);
+
+    @GET("participant/{id}/for-user")
+    Call<RegisteredParticipants> getRegisteredParticipants(@Header("token") String token, @Path("id") String id);
 }

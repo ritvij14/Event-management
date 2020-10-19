@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
         return homeBinding.getRoot();
     }
 
+    // populate Past competitions recycler view
     private void setPastCompetitions(ArrayList<CompetitionListItem> pastCompetitions) {
         homeBinding.pastEventsRv.setHasFixedSize(true);
         homeBinding.pastEventsRv.setLayoutManager(new LinearLayoutManager(
@@ -61,12 +62,14 @@ public class HomeFragment extends Fragment {
         ));
         CompetitionRecyclerAdapter pastCompetitionRvAdapter = new CompetitionRecyclerAdapter(
                 pastCompetitions,
+                "COMPLETED",
                 getContext()
         );
         homeBinding.pastEventsRv.setAdapter(pastCompetitionRvAdapter);
         pastCompetitionRvAdapter.notifyDataSetChanged();
     }
 
+    // populate upcoming competitions recycler view
     private void setUpcomingCompetitions(ArrayList<CompetitionListItem> upcomingCompetitions) {
         homeBinding.upcomingEventsRv.setHasFixedSize(true);
         homeBinding.upcomingEventsRv.setLayoutManager(new LinearLayoutManager(
@@ -76,25 +79,28 @@ public class HomeFragment extends Fragment {
         ));
         CompetitionRecyclerAdapter upcomingCompetitionRvAdapter = new CompetitionRecyclerAdapter(
                 upcomingCompetitions,
+                "UPCOMING",
                 getContext()
         );
         homeBinding.upcomingEventsRv.setAdapter(upcomingCompetitionRvAdapter);
         upcomingCompetitionRvAdapter.notifyDataSetChanged();
     }
 
-    private void setRegisteredCompetitions(ArrayList<CompetitionListItem> registeredCompetitions) {
-        homeBinding.registeredEventsRv.setHasFixedSize(true);
-        homeBinding.registeredEventsRv.setLayoutManager(new LinearLayoutManager(
+    // populate ongoing competitions recycler view
+    private void setOngoingCompetitions(ArrayList<CompetitionListItem> ongoingCompetitions) {
+        homeBinding.ongoingEventsRv.setHasFixedSize(true);
+        homeBinding.ongoingEventsRv.setLayoutManager(new LinearLayoutManager(
                 getContext(),
                 RecyclerView.VERTICAL,
                 false
         ));
-        CompetitionRecyclerAdapter registeredCompetitionRvAdapter = new CompetitionRecyclerAdapter(
-                registeredCompetitions,
+        CompetitionRecyclerAdapter ongoingCompetitionRvAdapter = new CompetitionRecyclerAdapter(
+                ongoingCompetitions,
+                "ONGOING",
                 getContext()
         );
-        homeBinding.registeredEventsRv.setAdapter(registeredCompetitionRvAdapter);
-        registeredCompetitionRvAdapter.notifyDataSetChanged();
+        homeBinding.ongoingEventsRv.setAdapter(ongoingCompetitionRvAdapter);
+        ongoingCompetitionRvAdapter.notifyDataSetChanged();
     }
 
     private void fetchCompetitions() {
@@ -110,7 +116,7 @@ public class HomeFragment extends Fragment {
                         if (competitionList != null) {
 
                             ArrayList<CompetitionListItem> upcomingCompetitions = new ArrayList<>();
-                            ArrayList<CompetitionListItem> registeredCompetitions = new ArrayList<>();
+                            ArrayList<CompetitionListItem> ongoingCompetitions = new ArrayList<>();
                             ArrayList<CompetitionListItem> pastCompetitions = new ArrayList<>();
 
                             for (Competition competition: competitionList) {
@@ -133,7 +139,7 @@ public class HomeFragment extends Fragment {
                                             competition.getCategory(),
                                             competition.getCompetitionID()
                                     );
-                                    registeredCompetitions.add(competitionListItem);
+                                    ongoingCompetitions.add(competitionListItem);
                                 }
 
                                 if (competition.getState().equals("COMPLETED")) {
@@ -148,7 +154,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             setUpcomingCompetitions(upcomingCompetitions);
-                            setRegisteredCompetitions(registeredCompetitions);
+                            setOngoingCompetitions(ongoingCompetitions);
                             setPastCompetitions(pastCompetitions);
                         } else {
                             Toast.makeText(getContext(), "Unable to load competitions at the moment", Toast.LENGTH_SHORT).show();

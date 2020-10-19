@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,6 +28,94 @@
             android:id="@+id/competition_header"
             layout="@layout/competition_header" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/the_topics_are_as_follows"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/group_1"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:id="@+id/group_one_topic"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="7dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/group_2"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:id="@+id/group_two_topic"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="7dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/group_3"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:id="@+id/group_three_topic"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,15 +134,17 @@
             android:id="@+id/submission_addition_heading"
             android:fontFamily="@font/montserrat_medium"
             android:textSize="17sp"
+            android:visibility="visible"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/black"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
             android:id="@+id/registered_participant_rv"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp" />
     </LinearLayout>
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>
