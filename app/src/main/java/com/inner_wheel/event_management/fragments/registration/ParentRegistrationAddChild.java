@@ -128,7 +128,8 @@ public class ParentRegistrationAddChild extends Fragment {
                             childListItems.add(new AddChildListItem(
                                     p.getName(),
                                     p.getAge(),
-                                    p.getSchoolName()
+                                    p.getSchoolName(),
+                                    p.getId()
                             ));
                             childRecyclerAdapter.notifyDataSetChanged();
                         }

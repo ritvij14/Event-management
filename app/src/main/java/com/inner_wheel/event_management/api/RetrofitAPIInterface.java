@@ -57,16 +57,16 @@ public interface RetrofitAPIInterface {
     Call<ParticipantsResponse> getParticipants(@Header("token") String token);
 
     @FormUrlEncoded
-    @POST
+    @POST("transaction/initiate")
     Call<TransactionInitiate> startTransaction(@Header("token") String token,
                                                @Field("competition_id") String competitionID,
                                                @Field("participant_id") String participantID,
                                                @Field("amount") String amount);
 
     @FormUrlEncoded
-    @PUT
+    @PUT("transaction/update")
     Call<TransactionInitiate> updateTransaction(@Header("token") String token,
                                     @Field("id") String id,
                                     @Field("transaction_id") String transactionID,
-                                    @Field("status") String status);
+                                    @Field("transaction_status") String status);
 }
