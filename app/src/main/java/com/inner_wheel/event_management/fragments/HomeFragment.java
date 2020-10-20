@@ -3,15 +3,18 @@ package com.inner_wheel.event_management.fragments;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.adapters.CompetitionRecyclerAdapter;
 import com.inner_wheel.event_management.api.RetrofitClient;
 import com.inner_wheel.event_management.api.models.Competition;
@@ -34,6 +37,7 @@ public class HomeFragment extends Fragment {
 
     FragmentHomeBinding homeBinding;
     SharedPrefs sharedPrefs;
+    DrawerLayout drawerLayout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,8 +49,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        drawerLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.drawer_layout);
 
         homeBinding.homeGreetingText.setText("Hi " + sharedPrefs.getName());
+        homeBinding.greetingProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
 
         fetchCompetitions();
         return homeBinding.getRoot();

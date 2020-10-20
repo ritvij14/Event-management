@@ -67,6 +67,12 @@ public class ParentLoginFragment extends Fragment {
                             if (parentLogin.getSuccess()) {
                                 sharedPrefs.setToken(parentLogin.getAuthToken());
                                 sharedPrefs.setUserAuthStatus("SIGNED_IN");
+                                sharedPrefs.setName(parentLogin.getUser().getName());
+                                sharedPrefs.setEmail(parentLogin.getUser().getEmail());
+                                sharedPrefs.setCity(parentLogin.getUser().getCity());
+                                sharedPrefs.setState(parentLogin.getUser().getState());
+                                sharedPrefs.setAddress(parentLogin.getUser().getAddress());
+                                sharedPrefs.setContactNumber(parentLogin.getUser().getPhoneNumber());
                                 Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext(), MainActivity.class));
                                 Objects.requireNonNull(getActivity()).finish();

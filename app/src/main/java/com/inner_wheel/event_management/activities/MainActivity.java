@@ -3,22 +3,27 @@ package com.inner_wheel.event_management.activities;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.databinding.ActivityMainBinding;
 import com.inner_wheel.event_management.fragments.HomeFragment;
+import com.inner_wheel.event_management.utils.SharedPrefs;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mainBinding;
     HomeFragment homeFragment;
+    SharedPrefs sharedPrefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        sharedPrefs = new SharedPrefs(this);
         setContentView(mainBinding.getRoot());
 
         initNavigationDrawer();
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    @SuppressLint("SetTextI18n")
     private void initNavigationDrawer() {
         mainBinding.navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -37,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.nav_about_us:
                     startActivity(new Intent(this, AboutActivity.class));
+                    break;
+
+                case R.id.nav_logout:
+                    sharedPrefs.setUserAuthStatus("SIGNED_OUT");
+                    startActivity(new Intent(this, RegistrationActivity.class));
+                    finish();
                     break;
             }
             return false;
@@ -55,5 +67,10 @@ public class MainActivity extends AppCompatActivity {
         };
         mainBinding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        // setting text for header
+        View headerLayout = mainBinding.navView.getHeaderView(0);
+        MaterialTextView navHeaderText = headerLayout.findViewById(R.id.nav_header_text);
+        navHeaderText.setText("Hi " + sharedPrefs.getName());
     }
 }

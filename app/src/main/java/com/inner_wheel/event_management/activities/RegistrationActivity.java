@@ -2,6 +2,7 @@ package com.inner_wheel.event_management.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.inner_wheel.event_management.R;
@@ -22,12 +23,12 @@ public class RegistrationActivity extends AppCompatActivity {
         loginFragment = new ParentLoginFragment();
         sharedPrefs = new SharedPrefs(this);
 
-        /*if (sharedPrefs.getUserAuthStatus() != null) {
+        if (sharedPrefs.getUserAuthStatus().equals("SIGNED_IN")) {
             startActivity(new Intent(this, MainActivity.class));
-        } else {*/
+        } else {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.registration_frame_layout, loginFragment)
                     .commit();
-        // }
+        }
     }
 }
