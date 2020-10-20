@@ -34,8 +34,13 @@ public class UpcomingCompRegisterFragment extends Fragment {
     SharedPrefs sharedPrefs;
     ArrayList<AddChildListItem> childListItems;
     SavedParticipantRecyclerAdapter participantRecyclerAdapter;
-    public UpcomingCompRegisterFragment() {
-        // Required empty public constructor
+    String name, topic, date, startTime, endTime;
+    public UpcomingCompRegisterFragment(String name, String topic, String date, String startTime, String endTime) {
+        this.name = name;
+        this.topic = topic;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
@@ -56,6 +61,12 @@ public class UpcomingCompRegisterFragment extends Fragment {
         participantRecyclerAdapter = new SavedParticipantRecyclerAdapter(childListItems, getContext());
         registerBinding.savedParticipantsRv.setAdapter(participantRecyclerAdapter);
         participantRecyclerAdapter.notifyDataSetChanged();
+
+        registerBinding.competitionHeader.competitionName.setText(name);
+        registerBinding.competitionHeader.category.setText(topic);
+        registerBinding.competitionHeader.date.setText(date);
+        registerBinding.competitionHeader.startTime.setText(startTime);
+        registerBinding.competitionHeader.endTime.setText(endTime);
 
         registerBinding.addChildInfoButton.setOnClickListener(v -> {
             String name = Objects.requireNonNull(registerBinding.participantNameField.getText()).toString();

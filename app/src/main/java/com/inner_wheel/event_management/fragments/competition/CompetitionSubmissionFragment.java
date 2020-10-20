@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.adapters.SubmissionRecyclerAdapter;
@@ -24,9 +25,13 @@ import com.inner_wheel.event_management.utils.SharedPrefs;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +44,7 @@ public class CompetitionSubmissionFragment extends Fragment {
     private String firstPrize = "First prize is Rs ";
     private String secondPrize = "Second prize is Rs ";
     private String thirdPrize = "Third prize is Rs ";
-    String id;
+    private String id, date, startTime, endTime;
     ArrayList<RegisteredListItem> list;
     SubmissionRecyclerAdapter submissionRecyclerAdapter;
     public CompetitionSubmissionFragment() {
@@ -86,7 +91,22 @@ public class CompetitionSubmissionFragment extends Fragment {
             @Override
             public void onResponse(@NotNull Call<SelectCompetition> call, @NotNull Response<SelectCompetition> response) {
                 SelectCompetition competition = response.body();
-                assert competition != null;
+
+                // formatting date and time
+                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
+                dateTimeFormat.setTimeZone(TimeZone.getTimeZone("IST"));
+                Date startDate = null, endDate = null;
+                try {
+                    startDate = dateTimeFormat.parse(competition.getCompetition().getStart());
+                    endDate = dateTimeFormat.parse(competition.getCompetition().getEnd());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                date = dateFormat.format(Objects.requireNonNull(startDate));
+                startTime = timeFormat.format(startDate);
+                endTime = timeFormat.format(Objects.requireNonNull(endDate));
 
                 // processing data for prize body
                 firstPrize += competition.getCompetition().getRewards().get(0);
@@ -97,12 +117,9 @@ public class CompetitionSubmissionFragment extends Fragment {
                         .setText(competition.getCompetition().getTitle());
                 submissionBinding.competitionHeader.category
                         .setText(competition.getCompetition().getCategory());
-                submissionBinding.competitionHeader.date
-                        .setText(competition.getCompetition().getStart().split("T", 2)[0]);
-                submissionBinding.competitionHeader.startTime
-                        .setText(competition.getCompetition().getStart());
-                submissionBinding.competitionHeader.endTime
-                        .setText(competition.getCompetition().getEnd());
+                submissionBinding.competitionHeader.date.setText(date);
+                submissionBinding.competitionHeader.startTime.setText(startTime);
+                submissionBinding.competitionHeader.endTime.setText(endTime);
                 // setting data for age group topics
                 submissionBinding.groupOneTopic.setText(competition.getCompetition().getAgeGroups().get(0).getName());
                 submissionBinding.groupTwoTopic.setText(competition.getCompetition().getAgeGroups().get(1).getName());
@@ -142,12 +159,14 @@ public class CompetitionSubmissionFragment extends Fragment {
                             submissionRecyclerAdapter.notifyDataSetChanged();
                         }
                     }
+                } else {
+                    Toast.makeText(getContext(), "No participants registered by you for this event.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<RegisteredParticipants> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
             }
         });
     }

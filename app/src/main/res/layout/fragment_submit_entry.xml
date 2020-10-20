@@ -20,12 +20,6 @@
             android:id="@+id/back_button"
             tools:ignore="ContentDescription" />
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/competition_header"
-            layout="@layout/competition_header" />
-
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

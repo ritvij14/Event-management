@@ -15,18 +15,12 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
             android:src="@drawable/back_button"
             android:background="@color/white"
             android:id="@+id/back_button"
             tools:ignore="ContentDescription" />
-
-        <include
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/competition_header"
-            layout="@layout/competition_header" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -95,7 +89,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginTop="30dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/continue_to_payment"
             android:id="@+id/pay"

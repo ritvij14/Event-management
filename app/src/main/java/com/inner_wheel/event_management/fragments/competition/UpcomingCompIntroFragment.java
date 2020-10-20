@@ -17,7 +17,11 @@ import com.inner_wheel.event_management.utils.SharedPrefs;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +36,7 @@ public class UpcomingCompIntroFragment extends Fragment {
     private String secondPrize = "Second prize is Rs ";
     private String thirdPrize = "Third prize is Rs ";
     private String fees = "Rs ";
-    private String id;
+    private String id, name, topic, date, startTime, endTime;
     public UpcomingCompIntroFragment() {
         // Required empty public constructor
     }
@@ -48,10 +52,8 @@ public class UpcomingCompIntroFragment extends Fragment {
         assert id != null;
         Log.d("INTRO FRAGMENT", id);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
-        registerFragment = new UpcomingCompRegisterFragment();
 
         fetchCompetitionData();
-
         introBinding.registerForCompButton.setOnClickListener(v -> getActivity()
                 .getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_competitions_frame, registerFragment)
@@ -68,20 +70,40 @@ public class UpcomingCompIntroFragment extends Fragment {
             public void onResponse(@NotNull Call<SelectCompetition> call, @NotNull Response<SelectCompetition> response) {
                 SelectCompetition competition = response.body();
                 assert competition != null;
+
+                // formatting date and time
+                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
+                dateTimeFormat.setTimeZone(TimeZone.getTimeZone("IST"));
+                Date startDate = null, endDate = null;
+                try {
+                    startDate = dateTimeFormat.parse(competition.getCompetition().getStart());
+                    endDate = dateTimeFormat.parse(competition.getCompetition().getEnd());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                date = dateFormat.format(Objects.requireNonNull(startDate));
+                startTime = timeFormat.format(startDate);
+                endTime = timeFormat.format(Objects.requireNonNull(endDate));
+
+                // getting and changing data
+                name = competition.getCompetition().getTitle();
+                topic = competition.getCompetition().getCategory();
                 firstPrize += competition.getCompetition().getRewards().get(0);
                 secondPrize += competition.getCompetition().getRewards().get(1);
                 thirdPrize += competition.getCompetition().getRewards().get(2);
                 fees += competition.getCompetition().getFees() + "/-";
+                registerFragment = new UpcomingCompRegisterFragment(name, topic, date, startTime, endTime);
+
+                // setting data
                 introBinding.competitionHeader.competitionName
-                        .setText(competition.getCompetition().getTitle());
+                        .setText(name);
                 introBinding.competitionHeader.category
-                        .setText(competition.getCompetition().getCategory());
-                introBinding.competitionHeader.date
-                        .setText(competition.getCompetition().getStart().split("T", 2)[0]);
-                introBinding.competitionHeader.startTime
-                        .setText(competition.getCompetition().getStart());
-                introBinding.competitionHeader.endTime
-                        .setText(competition.getCompetition().getEnd());
+                        .setText(topic);
+                introBinding.competitionHeader.date.setText(date);
+                introBinding.competitionHeader.startTime.setText(startTime);
+                introBinding.competitionHeader.endTime.setText(endTime);
                 introBinding.prizeListBody.firstPrizeText.setText(firstPrize);
                 introBinding.prizeListBody.secondPrizeText.setText(secondPrize);
                 introBinding.prizeListBody.thirdPrizeText.setText(thirdPrize);
