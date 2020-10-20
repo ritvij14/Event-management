@@ -49,10 +49,12 @@ public class SubmissionRecyclerAdapter extends RecyclerView.Adapter<SubmissionRe
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.main_competitions_frame, new SubmitEntryFragment(
+                                item.getId(),
                                 item.getName(),
                                 item.getSchool(),
                                 item.getAge(),
-                                item.getTopic()
+                                item.getTopic(),
+                                item.getGroupID()
                         ))
                         .commit();
             } else {

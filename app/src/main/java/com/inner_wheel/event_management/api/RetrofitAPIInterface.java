@@ -7,6 +7,7 @@ import com.inner_wheel.event_management.api.models.RegisteredParticipants;
 import com.inner_wheel.event_management.api.models.RegistrationResponse;
 import com.inner_wheel.event_management.api.models.SelectCompetition;
 import com.inner_wheel.event_management.api.models.SignUpResponse;
+import com.inner_wheel.event_management.api.models.SubmissionResponse;
 import com.inner_wheel.event_management.api.models.TransactionInitiate;
 
 import retrofit2.Call;
@@ -73,4 +74,11 @@ public interface RetrofitAPIInterface {
 
     @GET("participant/{id}/for-user")
     Call<RegisteredParticipants> getRegisteredParticipants(@Header("token") String token, @Path("id") String id);
+
+    @FormUrlEncoded
+    @POST("submission/add")
+    Call<SubmissionResponse> addSubmission(@Header("token") String token,
+                                           @Field("age_group_id") String groupID,
+                                           @Field("participant_id") String participantID,
+                                           @Field("url") String url);
 }

@@ -154,6 +154,7 @@ public class CompetitionSubmissionFragment extends Fragment {
                                     r.getAge(),
                                     r.getSchool(),
                                     r.getAgeGroup().getName(),
+                                    r.getAgeGroup().getGrpId(),
                                     r.isSubmitted()
                             ));
                             submissionRecyclerAdapter.notifyDataSetChanged();
