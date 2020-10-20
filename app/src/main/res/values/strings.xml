@@ -79,4 +79,10 @@
     <string name="group_1">"Group 1: "</string>
     <string name="group_2">"Group 2: "</string>
     <string name="group_3">"Group 3: "</string>
+    <string name="name">Name:</string>
+    <string name="age_">Age:</string>
+    <string name="school_">School:</string>
+    <string name="topic">Topic:</string>
+    <string name="upload_submission">Upload submission</string>
+    <string name="upload">Upload</string>
 </resources>

@@ -14,6 +14,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.api.models.AgeGroup;
 import com.inner_wheel.event_management.fragments.competition.CompetitionPaymentFragment;
+import com.inner_wheel.event_management.fragments.competition.SubmitEntryFragment;
 import com.inner_wheel.event_management.models.AddChildListItem;
 import com.inner_wheel.event_management.models.RegisteredListItem;
 
@@ -44,16 +45,16 @@ public class SubmissionRecyclerAdapter extends RecyclerView.Adapter<SubmissionRe
         holder.name.setText(item.getName());
         holder.itemView.setOnClickListener(v -> {
             if (!item.isSubmitted()) {
-                /*((FragmentActivity)context)
+                ((FragmentActivity)context)
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_competitions_frame, new SubmissionFragment(
-                                child.getName(),
-                                child.getSchool(),
-                                child.getAge(),
-                                ageGroup
+                        .replace(R.id.main_competitions_frame, new SubmitEntryFragment(
+                                item.getName(),
+                                item.getSchool(),
+                                item.getAge(),
+                                item.getTopic()
                         ))
-                        .commit();*/
+                        .commit();
             } else {
                 Toast.makeText(context, "Already submitted! You cannot make more than one submission.", Toast.LENGTH_LONG).show();
             }
