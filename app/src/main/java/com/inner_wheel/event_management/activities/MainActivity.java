@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(this, AboutActivity.class));
                     break;
 
+                case R.id.nav_transaction_history:
+                    startActivity(new Intent(this, TransactionHistoryActivity.class));
+                    break;
+
                 case R.id.nav_logout:
                     sharedPrefs.setUserAuthStatus("SIGNED_OUT");
                     startActivity(new Intent(this, RegistrationActivity.class));

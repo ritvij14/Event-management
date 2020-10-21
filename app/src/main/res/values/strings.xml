@@ -80,10 +80,19 @@
     <string name="group_2">"Group 2: "</string>
     <string name="group_3">"Group 3: "</string>
     <string name="name">Name:</string>
-    <string name="age_">Age:</string>
+    <string name="age_">Age :</string>
     <string name="school_">School:</string>
     <string name="topic">Topic:</string>
     <string name="upload_submission">Upload submission</string>
     <string name="upload">Upload</string>
     <string name="logout">Logout</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="rs_0">Rs 0/-</string>
+    <string name="successful">SUCCESSFUL</string>
+    <string name="jan_01_2020">Jan 01, 2020</string>
+    <string name="details">Details</string>
+    <string name="sbi0003">SBI0003</string>
+    <string name="transaction_id">Transaction ID :</string>
+    <string name="competition">Competition :</string>
+    <string name="participant">Participant :</string>
 </resources>
