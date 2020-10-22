@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.api.RetrofitClient;
 import com.inner_wheel.event_management.api.models.AgeGroup;
 import com.inner_wheel.event_management.api.models.RegistrationResponse;
@@ -61,6 +62,11 @@ public class CompetitionPaymentFragment extends Fragment {
 
         getAgeGroupInfo();
         paymentBinding.pay.setOnClickListener(view -> initiateTransaction());
+
+        paymentBinding.backButton.setOnClickListener(v -> Objects.requireNonNull(getActivity())
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_competitions_frame, new UpcomingCompIntroFragment())
+                .commit());
 
         return paymentBinding.getRoot();
     }
@@ -195,6 +201,10 @@ public class CompetitionPaymentFragment extends Fragment {
                 RegistrationResponse res = response.body();
                 if (res != null) {
                     Toast.makeText(getContext(), res.getMessage(), Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity())
+                            .getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.main_competitions_frame, new UpcomingCompIntroFragment())
+                            .commit();
                 } else {
                     Toast.makeText(getContext(), "Error registering participant", Toast.LENGTH_SHORT).show();
                 }

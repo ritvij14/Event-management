@@ -44,7 +44,6 @@
                 android:text=""
                 android:textSize="17sp"
                 android:background="@color/white"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/colorAccent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +68,7 @@
                 android:text=""
                 android:textSize="17sp"
                 android:background="@color/white"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/colorAccent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +93,6 @@
                 android:text=""
                 android:textSize="17sp"
                 android:background="@color/white"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/colorAccent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -119,7 +117,6 @@
                 android:text=""
                 android:textSize="17sp"
                 android:background="@color/white"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/colorAccent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -144,7 +141,6 @@
                 android:text=""
                 android:textSize="17sp"
                 android:background="@color/white"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/colorAccent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -186,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:padding="10dp"
                 android:text="@string/login"
                 android:id="@+id/register_to_login"
                 android:textColor="@color/colorAccent"

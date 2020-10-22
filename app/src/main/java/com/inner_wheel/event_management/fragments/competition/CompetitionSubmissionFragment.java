@@ -81,6 +81,7 @@ public class CompetitionSubmissionFragment extends Fragment {
         submissionBinding.registeredParticipantRv.setAdapter(submissionRecyclerAdapter);
         submissionRecyclerAdapter.notifyDataSetChanged();
 
+        submissionBinding.backButton.setOnClickListener(v -> getActivity().onBackPressed());
         return submissionBinding.getRoot();
     }
 
@@ -146,18 +147,23 @@ public class CompetitionSubmissionFragment extends Fragment {
                 RegisteredParticipants res = response.body();
                 if (res != null) {
                     if (res.isSuccess()) {
-                        for (RegisteredParticipants.RegisteredParticipant r:
-                                res.getRegisteredParticipantList()) {
-                            list.add(new RegisteredListItem(
-                                    r.getParticipantID(),
-                                    r.getName(),
-                                    r.getAge(),
-                                    r.getSchool(),
-                                    r.getAgeGroup().getName(),
-                                    r.getAgeGroup().getGrpId(),
-                                    r.isSubmitted()
-                            ));
-                            submissionRecyclerAdapter.notifyDataSetChanged();
+                        if (res.getRegisteredParticipantList().size() == 0) {
+                            submissionBinding.noParticipantsText.setVisibility(View.VISIBLE);
+                        } else {
+                            for (RegisteredParticipants.RegisteredParticipant r:
+                                    res.getRegisteredParticipantList()) {
+                                submissionBinding.noParticipantsText.setVisibility(View.GONE);
+                                list.add(new RegisteredListItem(
+                                        r.getParticipantID(),
+                                        r.getName(),
+                                        r.getAge(),
+                                        r.getSchool(),
+                                        r.getAgeGroup().getName(),
+                                        r.getAgeGroup().getGrpId(),
+                                        r.isSubmitted()
+                                ));
+                                submissionRecyclerAdapter.notifyDataSetChanged();
+                            }
                         }
                     }
                 } else {

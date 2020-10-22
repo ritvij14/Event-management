@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.inner_wheel.event_management.databinding.ActivityAboutBinding;
 
@@ -20,5 +21,7 @@ public class AboutActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         });
+
+        aboutBinding.aboutBackButton.setOnClickListener(v -> onBackPressed());
     }
 }

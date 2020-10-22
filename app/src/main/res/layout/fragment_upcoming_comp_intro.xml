@@ -14,8 +14,8 @@
         tools:ignore="UselessParent">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
             android:src="@drawable/back_button"
@@ -38,7 +38,8 @@
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/judges_instructions" />
+            layout="@layout/judges_instructions"
+            android:id="@+id/competition_instructions" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"

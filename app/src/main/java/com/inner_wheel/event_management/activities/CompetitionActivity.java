@@ -22,21 +22,26 @@ public class CompetitionActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         assert b != null;
         String compStatus = b.getString("STATUS");
-        Toast.makeText(this, compStatus, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, compStatus, Toast.LENGTH_SHORT).show();
 
         assert compStatus != null;
-        if (compStatus.equals("UPCOMING")) {
-            // for future competitions
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_competitions_frame, introFragment)
-                    .commit();
-        } else if (compStatus.equals("ONGOING")) {
-            // for competitions on current day
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_competitions_frame, submissionFragment)
-                    .commit();
-        } else if (compStatus.equals("COMPLETED")) {
-            // for competitions that have been completed
+        switch (compStatus) {
+            case "UPCOMING":
+                // for future competitions
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_competitions_frame, introFragment)
+                        .commit();
+                break;
+            case "ONGOING":
+                // for competitions on current day
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_competitions_frame, submissionFragment)
+                        .commit();
+                break;
+            case "COMPLETED":
+                // for competitions that have been completed
+
+                break;
         }
     }
 }

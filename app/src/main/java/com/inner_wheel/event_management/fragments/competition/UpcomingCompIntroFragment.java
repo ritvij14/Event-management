@@ -32,9 +32,9 @@ public class UpcomingCompIntroFragment extends Fragment {
     FragmentUpcomingCompIntroBinding introBinding;
     UpcomingCompRegisterFragment registerFragment;
     SharedPrefs sharedPrefs;
-    private String firstPrize = "First prize is Rs ";
-    private String secondPrize = "Second prize is Rs ";
-    private String thirdPrize = "Third prize is Rs ";
+    private String firstPrize;
+    private String secondPrize;
+    private String thirdPrize;
     private String fees = "Rs ";
     private String id, name, topic, date, startTime, endTime;
     public UpcomingCompIntroFragment() {
@@ -52,12 +52,18 @@ public class UpcomingCompIntroFragment extends Fragment {
         assert id != null;
         Log.d("INTRO FRAGMENT", id);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        firstPrize = "First prize is Rs ";
+        secondPrize = "Second prize is Rs ";
+        thirdPrize = "Third prize is Rs ";
 
         fetchCompetitionData();
         introBinding.registerForCompButton.setOnClickListener(v -> getActivity()
                 .getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_competitions_frame, registerFragment)
+                .addToBackStack(null)
                 .commit());
+
+        introBinding.backButton.setOnClickListener(v -> getActivity().onBackPressed());
 
         return introBinding.getRoot();
     }
@@ -107,6 +113,7 @@ public class UpcomingCompIntroFragment extends Fragment {
                 introBinding.prizeListBody.firstPrizeText.setText(firstPrize);
                 introBinding.prizeListBody.secondPrizeText.setText(secondPrize);
                 introBinding.prizeListBody.thirdPrizeText.setText(thirdPrize);
+                introBinding.competitionInstructions.rule1.setText(competition.getCompetition().getDescription());
                 introBinding.feesAmount.setText(fees);
             }
 

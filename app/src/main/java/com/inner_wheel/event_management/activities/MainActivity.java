@@ -77,4 +77,10 @@ public class MainActivity extends AppCompatActivity {
         MaterialTextView navHeaderText = headerLayout.findViewById(R.id.nav_header_text);
         navHeaderText.setText("Hi " + sharedPrefs.getName());
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

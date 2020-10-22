@@ -87,6 +87,11 @@ public class ParentRegistrationPersonalInfoFragment extends Fragment {
             return false;
         }
 
+        if (contactNumber.length() < 10) {
+            Toast.makeText(getContext(), "Phone number needs to be atleast 10 digits long", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         if (address.matches("")) {
             Toast.makeText(getContext(), "Please enter your address", Toast.LENGTH_SHORT).show();
             return false;

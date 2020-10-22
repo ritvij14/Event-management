@@ -65,6 +65,12 @@ public class SubmitEntryFragment extends Fragment {
         entryBinding = FragmentSubmitEntryBinding.inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
 
+        entryBinding.backButton.setOnClickListener(v -> Objects.requireNonNull(getActivity())
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_competitions_frame, new CompetitionSubmissionFragment())
+                .commit());
+
+
         // setting data
         entryBinding.registeredParticipantName.setText(name);
         entryBinding.registeredParticipantAge.setText(age);

@@ -47,6 +47,7 @@ public class SavedParticipantRecyclerAdapter extends RecyclerView.Adapter<SavedP
                         child.getAge(),
                         child.getId()
                 ))
+                .addToBackStack(null)
                 .commit());
     }
 

@@ -60,6 +60,7 @@ public class ParentRegistrationAddChild extends Fragment {
         childBinding.addChildButton.setOnClickListener(view -> {
             childBinding.addChildInfoCard.setVisibility(View.VISIBLE);
             childBinding.skipChildButton.setVisibility(View.GONE);
+            childBinding.childList.setVisibility(View.GONE);
         });
 
         childBinding.addChildInfoButton.setOnClickListener(view -> {
@@ -74,6 +75,7 @@ public class ParentRegistrationAddChild extends Fragment {
 
                 childBinding.addChildInfoCard.setVisibility(View.GONE);
                 childBinding.skipChildButton.setVisibility(View.VISIBLE);
+                childBinding.childList.setVisibility(View.VISIBLE);
 
                 registerChildParticipant(name, age, school);
             }
@@ -111,6 +113,7 @@ public class ParentRegistrationAddChild extends Fragment {
         call.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(@NotNull Call<Object> call, @NotNull Response<Object> response) {
+                childBinding.childListLoader.setVisibility(View.VISIBLE);
                 fetchChildren();
                 Toast.makeText(getContext(), "Your child has been registered", Toast.LENGTH_SHORT).show();
                 childBinding.skipChildButton.setText(R.string.next);
@@ -141,6 +144,7 @@ public class ParentRegistrationAddChild extends Fragment {
                                     p.getId()
                             ));
                             childRecyclerAdapter.notifyDataSetChanged();
+                            childBinding.childListLoader.setVisibility(View.GONE);
                         }
                     }
                 } else {

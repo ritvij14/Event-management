@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.adapters.SavedParticipantRecyclerAdapter;
 import com.inner_wheel.event_management.api.RetrofitClient;
 import com.inner_wheel.event_management.api.models.Participant;
@@ -74,6 +75,11 @@ public class UpcomingCompRegisterFragment extends Fragment {
             String school = Objects.requireNonNull(registerBinding.participantSchoolField.getText()).toString();
             saveParticipant(name, age, school);
         });
+
+        registerBinding.backButton.setOnClickListener(v -> Objects.requireNonNull(getActivity())
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_competitions_frame, new UpcomingCompIntroFragment())
+                .commit());
 
         return registerBinding.getRoot();
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.activities.CompetitionActivity;
 import com.inner_wheel.event_management.models.CompetitionListItem;
@@ -46,6 +47,13 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
         holder.compCategory.setText(competition.getCategory());
         holder.id = competition.getId();
 
+        if (compStatus.equals("ONGOING")) {
+            holder.competitionCard.setCardBackgroundColor(context.getResources().getColor(R.color.green));
+        }
+        if (compStatus.equals("COMPLETED")) {
+            holder.competitionCard.setCardBackgroundColor(context.getResources().getColor(R.color.red));
+        }
+
         holder.itemView.setOnClickListener(v -> {
             Intent compIntent = new Intent(context, CompetitionActivity.class);
             Bundle b = new Bundle();
@@ -61,10 +69,12 @@ public class CompetitionRecyclerAdapter extends RecyclerView.Adapter<Competition
     public int getItemCount() { return competitionList.size(); }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        MaterialCardView competitionCard;
         MaterialTextView compTitle, compDate, compCategory;
         String id;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            competitionCard = itemView.findViewById(R.id.competition_card);
             compTitle = itemView.findViewById(R.id.competition_title);
             compDate = itemView.findViewById(R.id.competition_date);
             compCategory = itemView.findViewById(R.id.competition_category);

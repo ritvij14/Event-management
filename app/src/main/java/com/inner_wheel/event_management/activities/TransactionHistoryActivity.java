@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.transition.TransitionManager;
+import android.view.View;
 
 import com.inner_wheel.event_management.adapters.TransactionHistoryAdapter;
 import com.inner_wheel.event_management.api.RetrofitClient;
@@ -34,6 +35,8 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         TransitionManager.beginDelayedTransition(historyBinding.transactionHistoryRv);
 
         fetchTransactions();
+
+        historyBinding.backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void fetchTransactions() {
