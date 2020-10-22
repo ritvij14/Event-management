@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.TransitionManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,6 +168,8 @@ public class HomeFragment extends Fragment {
                             setUpcomingCompetitions(upcomingCompetitions);
                             setOngoingCompetitions(ongoingCompetitions);
                             setPastCompetitions(pastCompetitions);
+
+                            homeBinding.competitionLoader.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(getContext(), "Unable to load competitions at the moment", Toast.LENGTH_SHORT).show();
                         }

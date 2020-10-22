@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.adapters.AddChildRecyclerAdapter;
 import com.inner_wheel.event_management.api.RetrofitClient;
 import com.inner_wheel.event_management.api.models.Participant;
@@ -34,6 +35,7 @@ public class ParentRegistrationAddChild extends Fragment {
     AddChildRecyclerAdapter childRecyclerAdapter;
     ArrayList<AddChildListItem> childListItems;
     SharedPrefs sharedPrefs;
+    ParentLoginFragment loginFragment;
     public ParentRegistrationAddChild() {
         // Required empty public constructor
     }
@@ -45,6 +47,7 @@ public class ParentRegistrationAddChild extends Fragment {
         childBinding = FragmentParentRegistrationAddChildBinding
             .inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        loginFragment = new ParentLoginFragment();
         childListItems = new ArrayList<>();
         childBinding.childList.setHasFixedSize(true);
         childBinding.childList.setLayoutManager(new LinearLayoutManager(getContext(),
@@ -74,6 +77,11 @@ public class ParentRegistrationAddChild extends Fragment {
 
                 registerChildParticipant(name, age, school);
             }
+
+            childBinding.skipChildButton.setOnClickListener(v -> Objects.requireNonNull(getActivity())
+                    .getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.registration_frame_layout, loginFragment)
+                    .commit());
         });
         return childBinding.getRoot();
     }
@@ -105,6 +113,7 @@ public class ParentRegistrationAddChild extends Fragment {
             public void onResponse(@NotNull Call<Object> call, @NotNull Response<Object> response) {
                 fetchChildren();
                 Toast.makeText(getContext(), "Your child has been registered", Toast.LENGTH_SHORT).show();
+                childBinding.skipChildButton.setText(R.string.next);
             }
 
             @Override

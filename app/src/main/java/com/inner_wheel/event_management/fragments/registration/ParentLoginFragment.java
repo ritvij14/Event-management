@@ -51,6 +51,8 @@ public class ParentLoginFragment extends Fragment {
             .replace(R.id.registration_frame_layout, parentRegistrationPersonalInfoFragment)
             .commit());
 
+        parentLoginBinding.emailField.setText(sharedPrefs.getEmail() != null ? sharedPrefs.getEmail() : "");
+
         parentLoginBinding.login.setOnClickListener(view -> {
             String email = Objects.requireNonNull(parentLoginBinding.emailField.getText())
                     .toString();
