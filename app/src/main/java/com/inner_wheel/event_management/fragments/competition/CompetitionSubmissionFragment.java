@@ -41,9 +41,9 @@ public class CompetitionSubmissionFragment extends Fragment {
 
     FragmentCompetitionSubmissionBinding submissionBinding;
     SharedPrefs sharedPrefs;
-    private String firstPrize = "First prize is Rs ";
-    private String secondPrize = "Second prize is Rs ";
-    private String thirdPrize = "Third prize is Rs ";
+    private String firstPrize;
+    private String secondPrize;
+    private String thirdPrize;
     private String id, date, startTime, endTime;
     ArrayList<RegisteredListItem> list;
     SubmissionRecyclerAdapter submissionRecyclerAdapter;
@@ -63,6 +63,9 @@ public class CompetitionSubmissionFragment extends Fragment {
         Log.d("INTRO FRAGMENT", id);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
         list = new ArrayList<>();
+        firstPrize = "First prize is Rs ";
+        secondPrize = "Second prize is Rs ";
+        thirdPrize = "Third prize is Rs ";
 
         // initialise recyclerview
         submissionBinding.registeredParticipantRv.setHasFixedSize(true);

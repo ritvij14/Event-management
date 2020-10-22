@@ -35,7 +35,7 @@ public class UpcomingCompIntroFragment extends Fragment {
     private String firstPrize;
     private String secondPrize;
     private String thirdPrize;
-    private String fees = "Rs ";
+    private String fees;
     private String id, name, topic, date, startTime, endTime;
     public UpcomingCompIntroFragment() {
         // Required empty public constructor
@@ -55,6 +55,7 @@ public class UpcomingCompIntroFragment extends Fragment {
         firstPrize = "First prize is Rs ";
         secondPrize = "Second prize is Rs ";
         thirdPrize = "Third prize is Rs ";
+        fees = "Rs ";
 
         fetchCompetitionData();
         introBinding.registerForCompButton.setOnClickListener(v -> getActivity()
@@ -75,46 +76,47 @@ public class UpcomingCompIntroFragment extends Fragment {
             @Override
             public void onResponse(@NotNull Call<SelectCompetition> call, @NotNull Response<SelectCompetition> response) {
                 SelectCompetition competition = response.body();
-                assert competition != null;
+                if (competition != null) {
+                    introBinding.competitionDataLoader.setVisibility(View.GONE);
+                    // formatting date and time
+                    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
+                    dateTimeFormat.setTimeZone(TimeZone.getTimeZone("IST"));
+                    Date startDate = null, endDate = null;
+                    try {
+                        startDate = dateTimeFormat.parse(competition.getCompetition().getStart());
+                        endDate = dateTimeFormat.parse(competition.getCompetition().getEnd());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    date = dateFormat.format(Objects.requireNonNull(startDate));
+                    startTime = timeFormat.format(startDate);
+                    endTime = timeFormat.format(Objects.requireNonNull(endDate));
 
-                // formatting date and time
-                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
-                SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
-                dateTimeFormat.setTimeZone(TimeZone.getTimeZone("IST"));
-                Date startDate = null, endDate = null;
-                try {
-                    startDate = dateTimeFormat.parse(competition.getCompetition().getStart());
-                    endDate = dateTimeFormat.parse(competition.getCompetition().getEnd());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    // getting and changing data
+                    name = competition.getCompetition().getTitle();
+                    topic = competition.getCompetition().getCategory();
+                    firstPrize += competition.getCompetition().getRewards().get(0);
+                    secondPrize += competition.getCompetition().getRewards().get(1);
+                    thirdPrize += competition.getCompetition().getRewards().get(2);
+                    fees += competition.getCompetition().getFees() + "/-";
+                    registerFragment = new UpcomingCompRegisterFragment(name, topic, date, startTime, endTime);
+
+                    // setting data
+                    introBinding.competitionHeader.competitionName
+                            .setText(name);
+                    introBinding.competitionHeader.category
+                            .setText(topic);
+                    introBinding.competitionHeader.date.setText(date);
+                    introBinding.competitionHeader.startTime.setText(startTime);
+                    introBinding.competitionHeader.endTime.setText(endTime);
+                    introBinding.prizeListBody.firstPrizeText.setText(firstPrize);
+                    introBinding.prizeListBody.secondPrizeText.setText(secondPrize);
+                    introBinding.prizeListBody.thirdPrizeText.setText(thirdPrize);
+                    introBinding.competitionInstructions.rule1.setText(competition.getCompetition().getDescription());
+                    introBinding.feesAmount.setText(fees);
                 }
-                date = dateFormat.format(Objects.requireNonNull(startDate));
-                startTime = timeFormat.format(startDate);
-                endTime = timeFormat.format(Objects.requireNonNull(endDate));
-
-                // getting and changing data
-                name = competition.getCompetition().getTitle();
-                topic = competition.getCompetition().getCategory();
-                firstPrize += competition.getCompetition().getRewards().get(0);
-                secondPrize += competition.getCompetition().getRewards().get(1);
-                thirdPrize += competition.getCompetition().getRewards().get(2);
-                fees += competition.getCompetition().getFees() + "/-";
-                registerFragment = new UpcomingCompRegisterFragment(name, topic, date, startTime, endTime);
-
-                // setting data
-                introBinding.competitionHeader.competitionName
-                        .setText(name);
-                introBinding.competitionHeader.category
-                        .setText(topic);
-                introBinding.competitionHeader.date.setText(date);
-                introBinding.competitionHeader.startTime.setText(startTime);
-                introBinding.competitionHeader.endTime.setText(endTime);
-                introBinding.prizeListBody.firstPrizeText.setText(firstPrize);
-                introBinding.prizeListBody.secondPrizeText.setText(secondPrize);
-                introBinding.prizeListBody.thirdPrizeText.setText(thirdPrize);
-                introBinding.competitionInstructions.rule1.setText(competition.getCompetition().getDescription());
-                introBinding.feesAmount.setText(fees);
             }
 
             @Override

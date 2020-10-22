@@ -23,6 +23,13 @@
             android:id="@+id/back_button"
             tools:ignore="ContentDescription" />
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/competition_data_loader"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
         <include
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

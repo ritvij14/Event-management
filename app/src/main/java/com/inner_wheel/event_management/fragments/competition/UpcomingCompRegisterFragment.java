@@ -29,6 +29,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class UpcomingCompRegisterFragment extends Fragment {
 
     FragmentUpcomingCompRegisterBinding registerBinding;
@@ -70,6 +72,7 @@ public class UpcomingCompRegisterFragment extends Fragment {
         registerBinding.competitionHeader.endTime.setText(endTime);
 
         registerBinding.addChildInfoButton.setOnClickListener(v -> {
+            registerBinding.addParticipantLoader.setVisibility(View.VISIBLE);
             String name = Objects.requireNonNull(registerBinding.participantNameField.getText()).toString();
             String age = Objects.requireNonNull(registerBinding.participantAgeField.getText()).toString();
             String school = Objects.requireNonNull(registerBinding.participantSchoolField.getText()).toString();
@@ -100,6 +103,7 @@ public class UpcomingCompRegisterFragment extends Fragment {
                 registerBinding.participantNameField.setText("");
                 registerBinding.participantAgeField.setText("");
                 registerBinding.participantSchoolField.setText("");
+                registerBinding.addParticipantLoader.setVisibility(GONE);
             }
 
             @Override
@@ -127,6 +131,7 @@ public class UpcomingCompRegisterFragment extends Fragment {
                                     p.getId()
                             ));
                             participantRecyclerAdapter.notifyDataSetChanged();
+                            registerBinding.addParticipantLoader.setVisibility(GONE);
                         }
                     }
                 } else {
