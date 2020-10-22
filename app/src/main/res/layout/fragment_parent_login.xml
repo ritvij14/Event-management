@@ -93,6 +93,12 @@
             app:cornerRadius="30dp"
             style="@style/TextAppearance.MaterialComponents.Button" />
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/login_loader" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,6 +117,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:text="@string/register_here"
@@ -122,6 +129,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:textAlignment="textEnd"
                 android:layout_weight="1"
                 android:text="@string/forgot_password"

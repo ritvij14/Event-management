@@ -54,6 +54,7 @@ public class ParentLoginFragment extends Fragment {
         parentLoginBinding.emailField.setText(sharedPrefs.getEmail() != null ? sharedPrefs.getEmail() : "");
 
         parentLoginBinding.login.setOnClickListener(view -> {
+            parentLoginBinding.loginLoader.setVisibility(View.VISIBLE);
             String email = Objects.requireNonNull(parentLoginBinding.emailField.getText())
                     .toString();
             String password = Objects.requireNonNull(parentLoginBinding.passwordField.getText())
@@ -76,6 +77,7 @@ public class ParentLoginFragment extends Fragment {
                                 sharedPrefs.setAddress(parentLogin.getUser().getAddress());
                                 sharedPrefs.setContactNumber(parentLogin.getUser().getPhoneNumber());
                                 Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                parentLoginBinding.loginLoader.setVisibility(View.INVISIBLE);
                                 startActivity(new Intent(getContext(), MainActivity.class));
                                 Objects.requireNonNull(getActivity()).finish();
                             }

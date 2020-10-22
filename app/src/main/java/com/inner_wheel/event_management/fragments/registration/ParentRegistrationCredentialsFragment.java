@@ -42,6 +42,7 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
 
         credentialsBinding.registerTwoNext.setOnClickListener(view -> {
+            credentialsBinding.signupLoader.setVisibility(View.VISIBLE);
             String parentEmail = Objects.requireNonNull(credentialsBinding
                 .emailField.getText()).toString();
             String parentPassword = Objects.requireNonNull(credentialsBinding
@@ -66,6 +67,7 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
                             if (res.isSuccess()) {
                                 sharedPrefs.setEmail(parentEmail);
                                 Toast.makeText(getContext(), "Sign up successful", Toast.LENGTH_SHORT).show();
+                                credentialsBinding.signupLoader.setVisibility(View.INVISIBLE);
                                 Objects.requireNonNull(getActivity())
                                         .getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.registration_frame_layout, addChildFragment)
