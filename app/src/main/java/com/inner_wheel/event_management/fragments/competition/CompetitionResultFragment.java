@@ -20,6 +20,8 @@ import com.inner_wheel.event_management.api.models.SelectCompetition;
 import com.inner_wheel.event_management.databinding.FragmentCompetitionResultBinding;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +43,7 @@ public class CompetitionResultFragment extends Fragment {
     private String id, name, topic, date, startTime, endTime;
     private ResultsAdapter resultsAdapter;
     ArrayList<AgeGroup> ageGroupList;
+    LoadToast lt;
     public CompetitionResultFragment() {
         // Required empty public constructor
     }
@@ -54,6 +57,10 @@ public class CompetitionResultFragment extends Fragment {
         Bundle b = Objects.requireNonNull(getActivity()).getIntent().getExtras();
         id = Objects.requireNonNull(b).getString("ID");
         ageGroupList = new ArrayList<>();
+        lt = new LoadToast(getContext());
+        lt.setText("Loading...");
+        lt.setTranslationY(100).setBorderColor(getResources().getColor(R.color.color_accent));
+        lt.show();
 
         resultBinding.resultsRv.setHasFixedSize(true);
         resultBinding.resultsRv.setLayoutManager(new LinearLayoutManager(
@@ -77,7 +84,6 @@ public class CompetitionResultFragment extends Fragment {
             public void onResponse(@NotNull Call<SelectCompetition> call, @NotNull Response<SelectCompetition> response) {
                 SelectCompetition competition = response.body();
                 if (competition != null) {
-                    // introBinding.competitionDataLoader.setVisibility(View.GONE);
                     // formatting date and time
                     SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
@@ -108,13 +114,16 @@ public class CompetitionResultFragment extends Fragment {
 
                     ageGroupList.addAll(competition.getCompetition().getAgeGroups());
                     resultsAdapter.notifyDataSetChanged();
+                    lt.success();
+                    lt.hide();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<SelectCompetition> call, @NotNull Throwable t) {
                 Log.d("SELECTED COMPETITION", "failed");
-                Log.d("SELECTED COMPETITION", sharedPrefs.getToken());
+                lt.error();
+                lt.hide();
             }
         });
     }
