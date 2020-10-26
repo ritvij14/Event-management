@@ -1,6 +1,7 @@
 package com.inner_wheel.event_management.fragments;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -24,6 +25,8 @@ import com.inner_wheel.event_management.databinding.FragmentHomeBinding;
 import com.inner_wheel.event_management.models.CompetitionListItem;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding homeBinding;
     SharedPrefs sharedPrefs;
     DrawerLayout drawerLayout;
-
+    LoadToast lt;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -51,6 +54,10 @@ public class HomeFragment extends Fragment {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
         drawerLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.drawer_layout);
+        lt = new LoadToast(getContext());
+        lt.setText("Loading...");
+        lt.setTranslationY(100).setBorderColor(getResources().getColor(R.color.color_accent));
+        lt.show();
 
         homeBinding.homeGreetingText.setText("Hi " + sharedPrefs.getName());
         homeBinding.greetingProfilePic.setOnClickListener(new View.OnClickListener() {
@@ -168,10 +175,12 @@ public class HomeFragment extends Fragment {
                             setUpcomingCompetitions(upcomingCompetitions);
                             setOngoingCompetitions(ongoingCompetitions);
                             setPastCompetitions(pastCompetitions);
-
-                            homeBinding.competitionLoader.setVisibility(View.GONE);
+                            lt.success();
+                            lt.hide();
                         } else {
+                            lt.error();
                             Toast.makeText(getContext(), "Unable to load competitions at the moment", Toast.LENGTH_SHORT).show();
+                            lt.hide();
                         }
                     }
                 } else {

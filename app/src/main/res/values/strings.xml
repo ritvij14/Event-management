@@ -96,4 +96,6 @@
     <string name="participant">Participant :</string>
     <string name="next">Next</string>
     <string name="no_participants_registered">No participants registered by you.</string>
+    <string name="ages">Ages :</string>
+    <string name="third_place">Third Place:</string>
 </resources>
