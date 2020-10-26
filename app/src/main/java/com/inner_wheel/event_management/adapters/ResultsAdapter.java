@@ -1,7 +1,6 @@
 package com.inner_wheel.event_management.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.inner_wheel.event_management.R;
 import com.inner_wheel.event_management.api.models.AgeGroup;
-import com.inner_wheel.event_management.utils.URLtoBitmap;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
 
@@ -46,7 +43,9 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         Toast.makeText(context, ageLimit, Toast.LENGTH_SHORT).show();
         holder.ages.setText(ageLimit);
         if (group.getWinner() != null) {
-            Picasso.get().load(group.getWinner().getFirst()).resize(50, 50).into(holder.firstPlaceWinner);
+            Picasso.get().load(group.getWinner().getFirst()).resize(500, 500).into(holder.firstPlaceWinner);
+            Picasso.get().load(group.getWinner().getSecond()).resize(500, 500).into(holder.secondPlaceWinner);
+            Picasso.get().load(group.getWinner().getThird()).resize(500, 500).into(holder.thirdPlaceWinner);
         }
         // Picasso.get().load(group.getWinner().getFirst()).into(holder.firstPlaceWinner);
     }
@@ -58,16 +57,14 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        MaterialTextView ages, secondPlaceName, secondPlacePrize, thirdPlaceName, thirdPlacePrize;
-        ImageView firstPlaceWinner;
+        MaterialTextView ages;
+        ImageView firstPlaceWinner, secondPlaceWinner, thirdPlaceWinner;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ages = itemView.findViewById(R.id.age_group);
             firstPlaceWinner = itemView.findViewById(R.id.first_prize_winner);
-            secondPlaceName = itemView.findViewById(R.id.second_place_winner);
-            secondPlacePrize = itemView.findViewById(R.id.second_place_prize);
-            thirdPlaceName = itemView.findViewById(R.id.third_place_winner);
-            thirdPlacePrize = itemView.findViewById(R.id.third_place_prize);
+            secondPlaceWinner = itemView.findViewById(R.id.second_prize_winner);
+            thirdPlaceWinner = itemView.findViewById(R.id.third_prize_winner);
         }
     }
 }

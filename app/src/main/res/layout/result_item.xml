@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -28,8 +28,9 @@
         android:layout_marginStart="37dp" />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/first_prize_winner"
         tools:ignore="ContentDescription" />
 
@@ -43,35 +44,12 @@
         android:layout_marginTop="22dp"
         android:layout_marginStart="37dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="75dp"
-        android:paddingEnd="50dp"
-        tools:ignore="RtlSymmetry">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/second_place_winner"
-            android:text=""
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:textColor="@color/dark_grey" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/second_place_prize"
-            android:text=""
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:textAlignment="textEnd" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:id="@+id/second_prize_winner"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -83,33 +61,10 @@
         android:layout_marginTop="22dp"
         android:layout_marginStart="37dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="75dp"
-        android:paddingEnd="50dp"
-        tools:ignore="RtlSymmetry">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/third_place_winner"
-            android:text=""
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:textColor="@color/dark_grey" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/third_place_prize"
-            android:text=""
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:textAlignment="textEnd" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:id="@+id/third_prize_winner"
+        tools:ignore="ContentDescription" />
 </LinearLayout>
