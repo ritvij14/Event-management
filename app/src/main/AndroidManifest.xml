@@ -16,7 +16,7 @@
         <activity android:name=".activities.TransactionHistoryActivity" />
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.CompetitionActivity" />
-        <activity android:name=".activities.RegistrationActivity" />
+        <activity android:name=".activities.RegistrationActivity" android:noHistory="true"/>
         <activity android:name=".activities.SplashScreenActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
