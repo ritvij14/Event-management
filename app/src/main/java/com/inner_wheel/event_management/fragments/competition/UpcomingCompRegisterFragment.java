@@ -19,6 +19,8 @@ import com.inner_wheel.event_management.databinding.FragmentUpcomingCompRegister
 import com.inner_wheel.event_management.models.AddChildListItem;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class UpcomingCompRegisterFragment extends Fragment {
     ArrayList<AddChildListItem> childListItems;
     SavedParticipantRecyclerAdapter participantRecyclerAdapter;
     String name, topic, date, startTime, endTime;
+    LoadToast lt;
     public UpcomingCompRegisterFragment(String name, String topic, String date, String startTime, String endTime) {
         this.name = name;
         this.topic = topic;
@@ -53,6 +56,9 @@ public class UpcomingCompRegisterFragment extends Fragment {
         registerBinding = FragmentUpcomingCompRegisterBinding.inflate(inflater, container, false);
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
         childListItems = new ArrayList<>();
+        lt = new LoadToast(getContext());
+        lt.setText("Loading...");
+        lt.setTranslationY(100).setBorderColor(getResources().getColor(R.color.color_accent));
 
         registerBinding.savedParticipantsRv.setHasFixedSize(true);
         registerBinding.savedParticipantsRv.setLayoutManager(new LinearLayoutManager(
@@ -72,7 +78,7 @@ public class UpcomingCompRegisterFragment extends Fragment {
         registerBinding.competitionHeader.endTime.setText(endTime);
 
         registerBinding.addChildInfoButton.setOnClickListener(v -> {
-            registerBinding.addParticipantLoader.setVisibility(View.VISIBLE);
+            lt.show();
             String name = Objects.requireNonNull(registerBinding.participantNameField.getText()).toString();
             String age = Objects.requireNonNull(registerBinding.participantAgeField.getText()).toString();
             String school = Objects.requireNonNull(registerBinding.participantSchoolField.getText()).toString();
@@ -103,13 +109,16 @@ public class UpcomingCompRegisterFragment extends Fragment {
                 registerBinding.participantNameField.setText("");
                 registerBinding.participantAgeField.setText("");
                 registerBinding.participantSchoolField.setText("");
-                registerBinding.addParticipantLoader.setVisibility(GONE);
+                lt.success();
+                lt.hide();
             }
 
             @Override
             public void onFailure(@NotNull Call<Object> call, @NotNull Throwable t) {
                 // error
                 Toast.makeText(getContext(), "Error registering child", Toast.LENGTH_SHORT).show();
+                lt.error();
+                lt.hide();
             }
         });
     }
@@ -131,17 +140,21 @@ public class UpcomingCompRegisterFragment extends Fragment {
                                     p.getId()
                             ));
                             participantRecyclerAdapter.notifyDataSetChanged();
-                            registerBinding.addParticipantLoader.setVisibility(GONE);
+                            lt.success();
+                            lt.hide();
                         }
                     }
                 } else {
                     Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                    lt.error();
+                    lt.hide();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<ParticipantsResponse> call, @NotNull Throwable t) {
-
+                lt.error();
+                lt.hide();
             }
         });
     }
