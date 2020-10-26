@@ -179,12 +179,14 @@ public class HomeFragment extends Fragment {
                             lt.hide();
                         } else {
                             lt.error();
-                            Toast.makeText(getContext(), "Unable to load competitions at the moment", Toast.LENGTH_SHORT).show();
                             lt.hide();
+                            Toast.makeText(getContext(), "Unable to load competitions at the moment", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
                     // show error message
+                    lt.error();
+                    lt.hide();
                     Toast.makeText(getContext(), "Unable to load competitions", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -192,6 +194,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(@NotNull Call<GetCompetitions> call, @NotNull Throwable t) {
                 // show error message
+                lt.error();
+                lt.hide();
                 Toast.makeText(getContext(), "Unable to load competitions", Toast.LENGTH_SHORT).show();
             }
         });

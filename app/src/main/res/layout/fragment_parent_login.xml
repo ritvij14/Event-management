@@ -93,12 +93,6 @@
             app:cornerRadius="30dp"
             style="@style/TextAppearance.MaterialComponents.Button" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:id="@+id/login_loader" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

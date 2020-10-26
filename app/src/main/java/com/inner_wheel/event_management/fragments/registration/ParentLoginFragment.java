@@ -19,6 +19,8 @@ import com.inner_wheel.event_management.api.models.ParentLogin;
 import com.inner_wheel.event_management.databinding.FragmentParentLoginBinding;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -32,6 +34,7 @@ public class ParentLoginFragment extends Fragment {
     FragmentParentLoginBinding parentLoginBinding;
     ParentRegistrationPersonalInfoFragment parentRegistrationPersonalInfoFragment;
     private SharedPrefs sharedPrefs;
+    LoadToast lt;
     public ParentLoginFragment() {
         // Required empty public constructor
     }
@@ -45,6 +48,9 @@ public class ParentLoginFragment extends Fragment {
             .inflate(inflater, container, false);
         parentRegistrationPersonalInfoFragment = new ParentRegistrationPersonalInfoFragment();
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        lt = new LoadToast(getContext());
+        lt.setText("Loading...");
+        lt.setTranslationY(100).setBorderColor(getResources().getColor(R.color.color_accent));
 
         parentLoginBinding.loginToRegister.setOnClickListener(view -> Objects.requireNonNull(getActivity())
             .getSupportFragmentManager().beginTransaction()
@@ -54,7 +60,7 @@ public class ParentLoginFragment extends Fragment {
         parentLoginBinding.emailField.setText(sharedPrefs.getEmail() != null ? sharedPrefs.getEmail() : "");
 
         parentLoginBinding.login.setOnClickListener(view -> {
-            parentLoginBinding.loginLoader.setVisibility(View.VISIBLE);
+            lt.show();
             String email = Objects.requireNonNull(parentLoginBinding.emailField.getText())
                     .toString();
             String password = Objects.requireNonNull(parentLoginBinding.passwordField.getText())
@@ -77,12 +83,15 @@ public class ParentLoginFragment extends Fragment {
                                 sharedPrefs.setAddress(parentLogin.getUser().getAddress());
                                 sharedPrefs.setContactNumber(parentLogin.getUser().getPhoneNumber());
                                 Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                                parentLoginBinding.loginLoader.setVisibility(View.INVISIBLE);
+                                lt.success();
+                                lt.hide();
                                 startActivity(new Intent(getContext(), MainActivity.class));
                                 Objects.requireNonNull(getActivity()).finish();
                             }
                         } else {
                             // show error message
+                            lt.error();
+                            lt.hide();
                             Toast.makeText(getContext(), "Login unsuccessful!", Toast.LENGTH_SHORT).show();
                             sharedPrefs.setUserAuthStatus(null);
                         }
@@ -91,6 +100,8 @@ public class ParentLoginFragment extends Fragment {
                     @Override
                     public void onFailure(@NotNull Call<ParentLogin> call, @NotNull Throwable t) {
                         // show error message
+                        lt.error();
+                        lt.hide();
                         Toast.makeText(getContext(), "Login unsuccessful! Please check your connection.", Toast.LENGTH_SHORT).show();
                     }
                 });

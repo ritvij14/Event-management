@@ -21,6 +21,10 @@ public class AgeGroup {
     @Expose
     String grpId;
 
+    @SerializedName("winner")
+    @Expose
+    private Winner winner;
+
     public String getStartAge() { return startAge; }
 
     public String getEndAge() { return endAge; }
@@ -29,6 +33,8 @@ public class AgeGroup {
 
     public String getGrpId() { return grpId; }
 
+    public Winner getWinner() { return winner; }
+
     public void setStartAge(String startAge) { this.startAge = startAge; }
 
     public void setEndAge(String endAge) { this.endAge = endAge; }
@@ -36,4 +42,6 @@ public class AgeGroup {
     public void setName(String name) { this.name = name; }
 
     public void setGrpId(String grpId) { this.grpId = grpId; }
+
+    public void setWinner(Winner winner) { this.winner = winner; }
 }
