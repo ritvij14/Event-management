@@ -15,6 +15,8 @@ import com.inner_wheel.event_management.api.models.SignUpResponse;
 import com.inner_wheel.event_management.databinding.FragmentParentRegistrationCredentialsBinding;
 import com.inner_wheel.event_management.utils.SharedPrefs;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -28,6 +30,7 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
     FragmentParentRegistrationCredentialsBinding credentialsBinding;
     ParentRegistrationAddChild addChildFragment;
     SharedPrefs sharedPrefs;
+    LoadToast lt;
     public ParentRegistrationCredentialsFragment() {
         // Required empty public constructor
     }
@@ -40,9 +43,12 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
             .inflate(inflater, container, false);
         addChildFragment = new ParentRegistrationAddChild();
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
+        lt = new LoadToast(getContext());
+        lt.setText("Loading...");
+        lt.setTranslationY(100).setBorderColor(getResources().getColor(R.color.color_accent));
 
         credentialsBinding.registerTwoNext.setOnClickListener(view -> {
-            credentialsBinding.signupLoader.setVisibility(View.VISIBLE);
+            lt.show();
             String parentEmail = Objects.requireNonNull(credentialsBinding
                 .emailField.getText()).toString();
             String parentPassword = Objects.requireNonNull(credentialsBinding
@@ -67,7 +73,8 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
                             if (res.isSuccess()) {
                                 sharedPrefs.setEmail(parentEmail);
                                 Toast.makeText(getContext(), "Sign up successful", Toast.LENGTH_SHORT).show();
-                                credentialsBinding.signupLoader.setVisibility(View.INVISIBLE);
+                                lt.success();
+                                lt.hide();
                                 Objects.requireNonNull(getActivity())
                                         .getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.registration_frame_layout, addChildFragment)
@@ -76,6 +83,8 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
                             }
                         } else {
                             // print error message
+                            lt.error();
+                            lt.hide();
                             Toast.makeText(getContext(), "Sign up Unsuccessful!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -83,6 +92,8 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
                     @Override
                     public void onFailure(@NotNull Call<SignUpResponse> call, @NotNull Throwable t) {
                         // error
+                        lt.error();
+                        lt.hide();
                         Toast.makeText(getContext(), "Error connecting to server", Toast.LENGTH_SHORT).show();
                     }
                 });
