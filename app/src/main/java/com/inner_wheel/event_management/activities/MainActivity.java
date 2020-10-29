@@ -33,21 +33,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mainBinding.getRoot());
 
 
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    Log.w("FIREBASE_MESSAGING", "Fetching FCM registration token failed", task.getException());
-                    return;
-                }
-
-                // Get new FCM registration token
-                String token = task.getResult();
-
-                // Log and toast
-                Log.d("FIREBASE_MESSAGING", token);
-                // Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.w("FIREBASE_MESSAGING", "Fetching FCM registration token failed", task.getException());
+                return;
             }
+
+            // Get new FCM registration token
+            String token = task.getResult();
+            sharedPrefs.setFcmToken(token);
+
+            // Log and toast
+            Log.d("FIREBASE_MESSAGING", token);
+            // Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
         });
 
 

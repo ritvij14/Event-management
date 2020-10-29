@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 
 public class SharedPrefs {
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private String token = "token", name = "name", email = "email", userAuthStatus = "AuthStatus", contactNumber = "contact_number",
-            address = "address", city = "city", state = "state";
+    private final SharedPreferences sharedPreferences;
+    private final SharedPreferences.Editor editor;
+    private final String token = "token", name = "name", email = "email", userAuthStatus = "AuthStatus",
+            contactNumber = "contact_number", address = "address", city = "city", state = "state", fcmToken = "fcm_token";
 
     @SuppressLint("CommitPrefEdits")
     public SharedPrefs(Context context) {
@@ -57,6 +57,11 @@ public class SharedPrefs {
         editor.commit();
     }
 
+    public void setFcmToken(String value) {
+        editor.putString(fcmToken, value);
+        editor.commit();
+    }
+
     public String getContactNumber() { return sharedPreferences.getString(contactNumber, null); }
 
     public String getAddress() { return sharedPreferences.getString(address, null); }
@@ -76,4 +81,6 @@ public class SharedPrefs {
     public String getName() {
         return sharedPreferences.getString(name, null);
     }
+
+    public String getFcmToken() { return sharedPreferences.getString(fcmToken, null); }
 }

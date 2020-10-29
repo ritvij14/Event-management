@@ -138,7 +138,7 @@ public class CompetitionPaymentFragment extends Fragment {
                 .appendQueryParameter("tn","Test transaction")
 //                        .appendQueryParameter("mc","1234")
                 .appendQueryParameter("tr","12345678")
-                .appendQueryParameter("am","0.00")
+                .appendQueryParameter("am","1.00")
                 .appendQueryParameter("cu","INR")
 //                .appendQueryParameter("url","https://google.com")
                 .build();
@@ -194,7 +194,14 @@ public class CompetitionPaymentFragment extends Fragment {
     }
 
     private void registerParticipant() {
-        Call<RegistrationResponse> call = RetrofitClient.getClient().registerParticipant(sharedPrefs.getToken(), ageGroupID, participantID, id);
+        Call<RegistrationResponse> call = RetrofitClient.getClient().registerParticipant(
+                sharedPrefs.getToken(),
+                ageGroupID,
+                participantID,
+                id,
+                compID,
+                sharedPrefs.getFcmToken()
+        );
         call.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {

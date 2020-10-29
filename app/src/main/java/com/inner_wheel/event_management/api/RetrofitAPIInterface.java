@@ -55,7 +55,9 @@ public interface RetrofitAPIInterface {
     Call<RegistrationResponse> registerParticipant(@Header("token") String token,
                                                    @Field("age_group_id") String ageGroupID,
                                                    @Field("participant_id") String participantID,
-                                                   @Field("transaction_id") String transactionID);
+                                                   @Field("transaction_id") String transactionID,
+                                                   @Field("competition_id") String competitionID,
+                                                   @Field("fcm_token") String fcmToken);
 
     @GET("participant/fetch")
     Call<ParticipantsResponse> getParticipants(@Header("token") String token);
