@@ -14,28 +14,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="40dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_round_menu_24"
+                tools:ignore="ContentDescription"
+                android:id="@+id/nav_menu"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1"
-                android:text="@string/hi_nipun"
+                android:text=""
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp"
-                android:id="@+id/home_greeting_text"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="30dp" />
+                android:id="@+id/home_greeting_text" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_person_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_refresh_24"
                 tools:ignore="ContentDescription"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
-                android:id="@+id/greeting_profile_pic"/>
+                android:id="@+id/reload_competitions"/>
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView

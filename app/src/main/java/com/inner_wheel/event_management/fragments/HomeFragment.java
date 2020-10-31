@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "RtlHardcoded"})
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,11 +60,10 @@ public class HomeFragment extends Fragment {
         lt.show();
 
         homeBinding.homeGreetingText.setText("Hi " + sharedPrefs.getName());
-        homeBinding.greetingProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(Gravity.LEFT);
-            }
+        homeBinding.navMenu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
+        homeBinding.reloadCompetitions.setOnClickListener(v -> {
+            lt.show();
+            fetchCompetitions();
         });
 
         fetchCompetitions();
