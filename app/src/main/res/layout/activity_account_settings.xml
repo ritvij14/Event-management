@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AccountSettingsActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_account_details"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="120dp"
+            android:layout_marginStart="40dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/edit_parent_name_layout"
+            android:hint="@string/parent_name"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:id="@+id/edit_parent_name_field"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/edit_phone_layout"
+            android:hint="@string/phone"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edit_phone_field"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:inputType="phone"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/edit_address_layout"
+            android:hint="@string/address"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edit_address_field"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/edit_city_layout"
+            android:hint="@string/city"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edit_city_field"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:id="@+id/edit_state_layout"
+            android:hint="@string/state"
+            android:textColorHint="@color/grey"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/colorAccent"
+            app:boxStrokeColor="@color/input_text_field_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edit_state_field"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="17sp"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorAccent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_child_details"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="45dp"
+            android:id="@+id/edit_child_details_rv" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:id="@+id/update_details"
+            android:enabled="false"
+            android:text="@string/update"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            app:cornerRadius="15dp"
+            style="@style/TextAppearance.MaterialComponents.Button" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

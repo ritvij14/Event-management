@@ -14,13 +14,11 @@ import com.inner_wheel.event_management.databinding.ActivityAboutBinding;
 public class AboutActivity extends AppCompatActivity {
 
     ActivityAboutBinding aboutBinding;
-    private FirebaseRemoteConfig firebaseRemoteConfig;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         aboutBinding = ActivityAboutBinding.inflate(getLayoutInflater());
-        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setMinimumFetchIntervalInSeconds(5)
                 .build();

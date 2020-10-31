@@ -99,4 +99,8 @@
     <string name="ages">Ages :</string>
     <string name="third_place">Third Place:</string>
     <string name="download_certificate">Download Certificate</string>
+    <string name="edit_account_details">Edit Account Details:</string>
+    <string name="update">Update</string>
+    <string name="child_details">Child Details</string>
+    <string name="edit_child_details">Edit Child details:</string>
 </resources>
