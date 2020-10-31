@@ -40,7 +40,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     public void onBindViewHolder(@NonNull ResultsAdapter.ViewHolder holder, int position) {
         AgeGroup group = ageGroups.get(position);
         String ageLimit = "Ages " + group.getStartAge() + "-" + group.getEndAge() + ":";
-        Toast.makeText(context, ageLimit, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, ageLimit, Toast.LENGTH_SHORT).show();
         holder.ages.setText(ageLimit);
         if (group.getWinner() != null) {
             Picasso.get().load(group.getWinner().getFirst()).resize(500, 500).into(holder.firstPlaceWinner);

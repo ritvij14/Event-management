@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.competition.CompetitionResultFragment">
 
     <LinearLayout
@@ -27,32 +28,32 @@
             layout="@layout/competition_header"
             android:id="@+id/competition_header" />
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/download_certificate_btn"
+            android:text="@string/download_certificate"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:backgroundTint="@color/green"
+            android:visibility="gone"
+            app:cornerRadius="15dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:id="@+id/certificate_img"
+            tools:ignore="ContentDescription" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/results"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="30dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/results_rv"
-                    android:translationZ="1.0dp"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -62,6 +63,34 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="40dp"
                 tools:ignore="ContentDescription" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/results"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="30dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/results_rv"
+                        android:translationZ="1.0dp"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </RelativeLayout>
     </LinearLayout>
 </FrameLayout>

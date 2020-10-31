@@ -68,7 +68,6 @@ public class UpcomingCompIntroFragment extends Fragment {
         introBinding.registerForCompButton.setOnClickListener(v -> getActivity()
                 .getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_competitions_frame, registerFragment)
-                .addToBackStack(null)
                 .commit());
 
         introBinding.backButton.setOnClickListener(v -> getActivity().onBackPressed());

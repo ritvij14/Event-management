@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="15dp"
-        android:text="@string/lorem_ipsum"
+        android:id="@+id/about_us_textview"
+        android:text=""
         android:fontFamily="@font/montserrat_regular"
         android:textSize="14sp"
         android:textColor="@color/dark_grey" />

@@ -98,4 +98,5 @@
     <string name="no_participants_registered">No participants registered by you.</string>
     <string name="ages">Ages :</string>
     <string name="third_place">Third Place:</string>
+    <string name="download_certificate">Download Certificate</string>
 </resources>
