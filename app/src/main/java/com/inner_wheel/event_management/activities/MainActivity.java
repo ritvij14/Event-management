@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
     private void initNavigationDrawer() {
         mainBinding.navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -101,9 +102,14 @@ public class MainActivity extends AppCompatActivity {
         navHeaderText.setText("Hi " + sharedPrefs.getName());
     }
 
+    @SuppressLint("RtlHardcoded")
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (mainBinding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mainBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+        } else {
+            super.onBackPressed();
+            finish();
+        }
     }
 }
