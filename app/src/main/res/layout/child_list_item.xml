@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="15dp"
+    android:id="@+id/child_list_card"
+    android:backgroundTint="@color/colorAccent"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp">
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="15dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="15dp">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/child_name"
+            android:text="@string/child_name"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/white"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/child_name"
-                android:text="@string/child_name"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textSize="14sp"
-                android:textColor="@color/white"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/child_age"
+            android:layout_marginTop="5dp"
+            android:text="@string/child_age"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="14sp"
+            android:textColor="@color/white"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/child_age"
-                android:layout_marginTop="5dp"
-                android:text="@string/child_age"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="14sp"
-                android:textColor="@color/white"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/child_school"
-                android:layout_marginTop="5dp"
-                android:text="@string/child_school"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="17sp"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/child_school"
+            android:layout_marginTop="5dp"
+            android:text="@string/child_school"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="17sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

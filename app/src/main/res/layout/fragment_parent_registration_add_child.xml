@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,122 +8,10 @@
     android:id="@+id/add_child_frame"
     tools:context=".fragments.registration.ParentRegistrationAddChild">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="UselessParent">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:backgroundTint="@color/colorAccent"
-            android:padding="50dp"
-            android:id="@+id/add_child_info_card"
-            android:visibility="gone"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="20dp"
-                android:paddingHorizontal="15dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_child"
-                    android:fontFamily="@font/montserrat_extra_bold"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/child_name_layout"
-                    android:hint="@string/full_name"
-                    android:textColorHint="@color/white"
-                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/child_name_field"
-                        android:maxLines="1"
-                        android:textSize="17sp"
-                        android:background="@color/colorAccent"
-                        android:inputType="textPersonName"
-                        android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/child_age_layout"
-                    android:hint="@string/age"
-                    android:textColorHint="@color/white"
-                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/child_age_field"
-                        android:maxLines="1"
-                        android:textSize="17sp"
-                        android:background="@color/colorAccent"
-                        android:inputType="number"
-                        android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/child_school_layout"
-                    android:hint="@string/school"
-                    android:textColorHint="@color/white"
-                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/child_school_field"
-                        android:maxLines="1"
-                        android:textSize="17sp"
-                        android:background="@color/colorAccent"
-                        android:inputType="text"
-                        android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:id="@+id/add_child_info_button"
-                    android:text="@string/add"
-                    android:textColor="@color/colorAccent"
-                    android:backgroundTint="@color/white"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textSize="14sp"
-                    android:textAllCaps="false"
-                    app:cornerRadius="30dp"
-                    style="@style/TextAppearance.MaterialComponents.Button" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -179,29 +67,25 @@
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="visible"
-                android:id="@+id/child_list_loader" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="outsideInset"
+                android:fadeScrollbars="false"
                 android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:paddingHorizontal="20dp"
                 android:visibility="visible"
                 android:id="@+id/child_list" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:id="@+id/skip_child_button"
-            android:layout_marginBottom="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:paddingHorizontal="50dp"
             android:text="@string/skip_for_now"
             android:textAllCaps="false"
@@ -209,6 +93,6 @@
             android:fontFamily="@font/roboto_regular"
             android:textSize="17sp"
             android:backgroundTint="@color/colorAccent"
-            app:cornerRadius="30dp"/>
-    </RelativeLayout>
-</FrameLayout>
+            app:cornerRadius="15dp"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -28,8 +28,8 @@ import retrofit2.Response;
 public class ParentRegistrationCredentialsFragment extends Fragment {
 
     FragmentParentRegistrationCredentialsBinding credentialsBinding;
-    ParentRegistrationAddChild addChildFragment;
-    SharedPrefs sharedPrefs;
+    ParentLoginFragment loginFragment;
+   SharedPrefs sharedPrefs;
     LoadToast lt;
     public ParentRegistrationCredentialsFragment() {
         // Required empty public constructor
@@ -41,7 +41,7 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
         // Inflate the layout for this fragment
         credentialsBinding = FragmentParentRegistrationCredentialsBinding
             .inflate(inflater, container, false);
-        addChildFragment = new ParentRegistrationAddChild();
+        loginFragment = new ParentLoginFragment();
         sharedPrefs = new SharedPrefs(Objects.requireNonNull(getContext()));
         lt = new LoadToast(getContext());
         lt.setText("Loading...");
@@ -72,14 +72,15 @@ public class ParentRegistrationCredentialsFragment extends Fragment {
                         if (res != null) {
                             if (res.isSuccess()) {
                                 sharedPrefs.setEmail(parentEmail);
-                                Toast.makeText(getContext(), "Sign up successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Sign up successful. Please login.", Toast.LENGTH_SHORT).show();
                                 lt.success();
                                 lt.hide();
                                 Objects.requireNonNull(getActivity())
                                         .getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.registration_frame_layout, addChildFragment)
+                                        .replace(R.id.registration_frame_layout, loginFragment)
                                         .addToBackStack(null)
                                         .commit();
+                                sharedPrefs.setIsJustRegistered(true);
                             }
                         } else {
                             // print error message

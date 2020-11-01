@@ -8,7 +8,7 @@ public class SharedPrefs {
 
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
-    private final String token = "token", name = "name", email = "email", userAuthStatus = "AuthStatus",
+    private final String token = "token", name = "name", email = "email", userAuthStatus = "AuthStatus", isJustRegistered = "just_registered",
             contactNumber = "contact_number", address = "address", city = "city", state = "state", fcmToken = "fcm_token";
 
     @SuppressLint("CommitPrefEdits")
@@ -61,6 +61,13 @@ public class SharedPrefs {
         editor.putString(fcmToken, value);
         editor.commit();
     }
+
+    public void setIsJustRegistered(Boolean justRegistered) {
+        editor.putBoolean(isJustRegistered, justRegistered);
+        editor.commit();
+    }
+
+    public boolean getIsJustRegistered() { return sharedPreferences.getBoolean(isJustRegistered, false); }
 
     public String getContactNumber() { return sharedPreferences.getString(contactNumber, null); }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="15dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_child"
+        android:fontFamily="@font/montserrat_extra_bold"
+        android:textSize="17sp"
+        android:textColor="@color/colorAccent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/child_name_layout"
+        android:hint="@string/full_name"
+        android:textColorHint="@color/grey"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/child_name_field"
+            android:maxLines="1"
+            android:textSize="17sp"
+            android:background="@color/white"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorAccent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/child_age_layout"
+        android:hint="@string/age"
+        android:textColorHint="@color/grey"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/child_age_field"
+            android:maxLines="1"
+            android:textSize="17sp"
+            android:background="@color/white"
+            android:inputType="number"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorAccent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/child_school_layout"
+        android:hint="@string/school"
+        android:textColorHint="@color/grey"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/child_school_field"
+            android:maxLines="1"
+            android:textSize="17sp"
+            android:background="@color/white"
+            android:inputType="text"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorAccent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:id="@+id/add_child_info_button"
+        android:text="@string/add"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/colorAccent"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp"
+        style="@style/TextAppearance.MaterialComponents.Button" />
+</LinearLayout>

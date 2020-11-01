@@ -82,11 +82,10 @@ public class ParentLoginFragment extends Fragment {
                                 sharedPrefs.setState(parentLogin.getUser().getState());
                                 sharedPrefs.setAddress(parentLogin.getUser().getAddress());
                                 sharedPrefs.setContactNumber(parentLogin.getUser().getPhoneNumber());
-                                Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Welcome!", Toast.LENGTH_SHORT).show();
                                 lt.success();
                                 lt.hide();
-                                startActivity(new Intent(getContext(), MainActivity.class));
-                                Objects.requireNonNull(getActivity()).finish();
+                                completeLogin();
                             }
                         } else {
                             // show error message
@@ -108,6 +107,19 @@ public class ParentLoginFragment extends Fragment {
             }
         });
         return parentLoginBinding.getRoot();
+    }
+
+    private void completeLogin() {
+        if (sharedPrefs.getIsJustRegistered()) {
+            ParentRegistrationAddChild addChild = new ParentRegistrationAddChild();
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.registration_frame_layout, addChild)
+                    .commit();
+        } else {
+            startActivity(new Intent(getContext(), MainActivity.class));
+            Objects.requireNonNull(getActivity()).finish();
+        }
     }
 
     private boolean checkFields(String email, String password) {
