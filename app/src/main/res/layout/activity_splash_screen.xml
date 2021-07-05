@@ -8,15 +8,16 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".activities.SplashScreenActivity">
+    tools:context=".activities.SplashScreenActivity"
+    tools:ignore="ExtraText">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
         android:id="@+id/splash_logo"
         tools:ignore="ContentDescription"
         android:layout_marginBottom="50dp"/>
+    <!--android:src="@drawable/logo"-->
 
     <TextView
         android:layout_width="wrap_content"

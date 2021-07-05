@@ -61,7 +61,7 @@ public class CompetitionPaymentFragment extends Fragment {
         paymentBinding.participantInfoSchool.setText(school);
 
         getAgeGroupInfo();
-        paymentBinding.pay.setOnClickListener(view -> initiateTransaction());
+        paymentBinding.pay.setOnClickListener(view -> registerParticipant());
 
         paymentBinding.backButton.setOnClickListener(v -> Objects.requireNonNull(getActivity())
                 .getSupportFragmentManager().beginTransaction()
@@ -69,28 +69,6 @@ public class CompetitionPaymentFragment extends Fragment {
                 .commit());
 
         return paymentBinding.getRoot();
-    }
-
-    private void initiateTransaction() {
-        Call<TransactionInitiate> call = RetrofitClient.getClient()
-                .startTransaction(sharedPrefs.getToken(), compID, participantID, feeAmount);
-        call.enqueue(new Callback<TransactionInitiate>() {
-            @Override
-            public void onResponse(@NotNull Call<TransactionInitiate> call, @NotNull Response<TransactionInitiate> response) {
-                TransactionInitiate initiate = response.body();
-                if (initiate != null && initiate.isSuccess()) {
-                    id = initiate.getTransaction().getId();
-                    openGooglePay();
-                } else {
-                    Toast.makeText(getContext(), "Unable to initiate transaction", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<TransactionInitiate> call, @NotNull Throwable t) {
-                Toast.makeText(getContext(), "Unable to initiate transaction", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void getAgeGroupInfo() {
@@ -125,70 +103,6 @@ public class CompetitionPaymentFragment extends Fragment {
             public void onFailure(@NotNull Call<SelectCompetition> call, @NotNull Throwable t) {
                 Log.d("SELECTED COMPETITION", "failed");
                 Log.d("SELECTED COMPETITION", sharedPrefs.getToken());
-            }
-        });
-    }
-
-    private void openGooglePay(){
-        Uri uri = new Uri.Builder()
-                .scheme("upi")
-                .authority("pay")
-                .appendQueryParameter("pa","")
-                .appendQueryParameter("pn","")
-                .appendQueryParameter("tn","Test transaction")
-//                        .appendQueryParameter("mc","1234")
-                .appendQueryParameter("tr","")
-                .appendQueryParameter("am","1.00")
-                .appendQueryParameter("cu","INR")
-//                .appendQueryParameter("url","https://google.com")
-                .build();
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(uri);
-        intent.setPackage(GOOGLE_PAY_PACKAGE_NAME);
-        startActivityForResult(intent, GOOGLE_PAY_REQUEST_CODE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        String message="";
-        if(requestCode == GOOGLE_PAY_REQUEST_CODE) {
-            try {
-                String status = null; // "SUCCESS" if transaction is successful, else "FAILURE"
-                String transactionId = "";
-                if (data != null) {
-                    status = data.getStringExtra("Status");
-                    transactionId = data.getStringExtra("txnId");
-                }
-                assert status != null;
-                if (status.equals("SUCCESS")) {
-                    message = "Payment successful";
-                    updateTransaction(id, transactionId, "SUCCESSFUL");
-                } else{
-                    message = "Payment Failed";
-                }
-            } catch (Exception e) {
-                message = "Some error occurred, could not open Google Pay";
-            }
-        }
-        if(!message.equals(""))
-            Toast.makeText(paymentBinding.getRoot().getContext(), message,Toast.LENGTH_SHORT).show();
-    }
-
-    private void updateTransaction(String transID, String gpayID, String status) {
-
-        Call<TransactionInitiate> call = RetrofitClient.getClient().updateTransaction(sharedPrefs.getToken(), transID, gpayID, status);
-        call.enqueue(new Callback<TransactionInitiate>() {
-            @Override
-            public void onResponse(@NotNull Call<TransactionInitiate> call, @NotNull Response<TransactionInitiate> response) {
-                Log.d("TRANSACTION_UPDATE", "Update successful");
-                registerParticipant();
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<TransactionInitiate> call, @NotNull Throwable t) {
-
             }
         });
     }

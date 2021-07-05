@@ -53,7 +53,7 @@ public class PushNotificationService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this,"CHANNEL_ID")
                         .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
-                        .setSmallIcon(R.drawable.logo)
+                        //.setSmallIcon(R.drawable.logo)
                         .setContentTitle(title)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setContentText(message)
